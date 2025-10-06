@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Manage - Library Management System</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/admin.css">
+    <link rel="stylesheet" href="styles/user-dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .manage-header { display:flex; justify-content:space-between; align-items:center; margin: 1.5rem 0; }
+        .manage-search { display:flex; gap:0.5rem; }
+        .manage-container { background:#fff; border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,0.08); padding:1rem; }
+        .manage-grid { display:grid; grid-template-columns: 360px 1fr; gap:1rem; }
+        .manage-form { background:#f8f9fa; border-radius:12px; padding:1rem; }
+        .manage-form .form-group { margin-bottom:0.75rem; }
+        .books-table { width:100%; border-collapse:collapse; }
+        .books-table th, .books-table td { padding:0.75rem; border-bottom:1px solid #eaecef; text-align:left; }
+        .books-table th { background:#f6f8fa; text-transform:uppercase; font-size:0.8rem; color:#555; }
+        .form-actions { display:flex; gap:0.5rem; }
+        @media (max-width: 992px){ .manage-grid{ grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">
+                <i class="fas fa-book-open"></i>
+                <a href="index.html" style="color: white; text-decoration: none;">Library Management System</a>
+            </h1>
+            <nav id="navbar" class="nav"></nav>
+        </div>
+    </header>
+
+    <main class="dashboard-main">
+        <div class="container">
+            <div class="manage-header">
+                <h2><i class="fas fa-tools"></i> Manage Books</h2>
+                <div class="manage-search">
+                    <input type="text" id="searchInput" placeholder="Search by title, author, category or ISBN" class="input" style="min-width: 320px;">
+                    <button id="searchBtn" class="btn btn-primary"><i class="fas fa-search"></i> Search</button>
+                </div>
+            </div>
+
+            <div class="manage-container">
+                <div class="manage-grid">
+                    <section class="manage-form">
+                        <h3><i class="fas fa-plus-circle"></i> Add / Update Book</h3>
+                        <div class="form-group">
+                            <label>Title</label>
+                            <input type="text" id="title" class="input" placeholder="Book title">
+                        </div>
+                        <div class="form-group">
+                            <label>Author</label>
+                            <input type="text" id="author" class="input" placeholder="Author name">
+                        </div>
+                        <div class="form-group">
+                            <label>Category</label>
+                            <input type="text" id="category" class="input" placeholder="e.g., Fiction, Science">
+                        </div>
+                        <div class="form-group">
+                            <label>ISBN</label>
+                            <input type="text" id="isbn" class="input" placeholder="ISBN">
+                        </div>
+                        <div class="form-group">
+                            <label>Cover Image URL</label>
+                            <input type="text" id="cover_image" class="input" placeholder="https://...">
+                        </div>
+                        <div class="form-group">
+                            <label>Available Copies</label>
+                            <input type="number" id="available_copies" class="input" min="0" value="1">
+                        </div>
+                        <div class="form-actions">
+                            <button id="addBookBtn" class="btn btn-primary"><i class="fas fa-plus"></i> Add</button>
+                            <button id="updateBookBtn" class="btn btn-secondary" disabled><i class="fas fa-save"></i> Update</button>
+                            <button id="clearFormBtn" class="btn btn-outline"><i class="fas fa-undo"></i> Clear</button>
+                        </div>
+                        <input type="hidden" id="editBookId" />
+                    </section>
+
+                    <section>
+                        <div style="overflow:auto;">
+                            <table class="books-table" id="booksTable">
+                                <thead>
+                                    <tr>
+                                        <th>Cover</th>
+                                        <th>Title</th>
+                                        <th>Author</th>
+                                        <th>Category</th>
+                                        <th>ISBN</th>
+                                        <th>Available</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="booksTbody"></tbody>
+                            </table>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Library Management System. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/nav.js"></script>
+    <script src="js/user-manage.js"></script>
+</body>
+</html>
+
+

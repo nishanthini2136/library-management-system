@@ -1,0 +1,34 @@
+<svg width="300" height="400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Book cover background -->
+  <rect width="300" height="400" fill="#e6d7b8" />
+  
+  <!-- Book spine shadow -->
+  <rect x="10" y="10" width="280" height="380" fill="#d6c7a8" rx="5" ry="5" />
+  
+  <!-- Book cover -->
+  <rect x="15" y="15" width="270" height="370" fill="#f0e6d2" stroke="#c9bca3" stroke-width="2" rx="3" ry="3" />
+  
+  <!-- Greek column design -->
+  <rect x="60" y="50" width="180" height="20" fill="#c9bca3" />
+  <rect x="60" y="70" width="180" height="150" fill="none" stroke="#c9bca3" stroke-width="2" />
+  
+  <!-- Column details -->
+  <line x1="80" y1="70" x2="80" y2="220" stroke="#c9bca3" stroke-width="2" />
+  <line x1="110" y1="70" x2="110" y2="220" stroke="#c9bca3" stroke-width="2" />
+  <line x1="140" y1="70" x2="140" y2="220" stroke="#c9bca3" stroke-width="2" />
+  <line x1="170" y1="70" x2="170" y2="220" stroke="#c9bca3" stroke-width="2" />
+  <line x1="200" y1="70" x2="200" y2="220" stroke="#c9bca3" stroke-width="2" />
+  <line x1="230" y1="70" x2="230" y2="220" stroke="#c9bca3" stroke-width="2" />
+  
+  <!-- Column base -->
+  <rect x="60" y="220" width="180" height="20" fill="#c9bca3" />
+  
+  <!-- Greek key pattern -->
+  <path d="M40,260 H260 M40,270 H260 M40,280 H260" stroke="#c9bca3" stroke-width="1" />
+  
+  <!-- Book title -->
+  <text x="150" y="300" font-family="Times New Roman, serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#5c4f3c">THE REPUBLIC</text>
+  
+  <!-- Author -->
+  <text x="150" y="330" font-family="Times New Roman, serif" font-size="18" text-anchor="middle" fill="#5c4f3c">PLATO</text>
+</svg>

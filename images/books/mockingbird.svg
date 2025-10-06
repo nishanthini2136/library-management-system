@@ -1,0 +1,23 @@
+<svg width="300" height="400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Book cover background -->
+  <rect width="300" height="400" fill="#e8e8e8" />
+  
+  <!-- Book spine shadow -->
+  <rect x="10" y="10" width="280" height="380" fill="#d8d8d8" rx="5" ry="5" />
+  
+  <!-- Book cover -->
+  <rect x="15" y="15" width="270" height="370" fill="#ffffff" stroke="#cccccc" stroke-width="2" rx="3" ry="3" />
+  
+  <!-- Tree silhouette -->
+  <path d="M150,60 L150,250 M120,100 L180,100 M100,150 L200,150 M80,200 L220,200" stroke="#333333" stroke-width="3" />
+  
+  <!-- Mockingbird silhouette -->
+  <path d="M180,90 C190,80 200,85 205,90 C210,95 210,100 205,105 C215,100 225,105 220,115 C230,110 235,120 225,125 L215,120 L220,130 L210,125 L215,135 L205,130 L200,140 L190,130 L180,140 L175,130 L165,135 L170,125 L160,130 L165,120 L155,125 C145,120 150,110 160,115 C155,105 165,100 175,105 C170,95 180,100 180,90 Z" fill="#333333" />
+  
+  <!-- Book title -->
+  <text x="150" y="280" font-family="Georgia, serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#333333">TO KILL A</text>
+  <text x="150" y="305" font-family="Georgia, serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#333333">MOCKINGBIRD</text>
+  
+  <!-- Author -->
+  <text x="150" y="340" font-family="Georgia, serif" font-size="14" text-anchor="middle" fill="#666666">Harper Lee</text>
+</svg>

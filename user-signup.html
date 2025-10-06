@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Signup - Library Management System</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">
+                <i class="fas fa-book-open"></i>
+                <a href="index.html" style="color: white; text-decoration: none;">Library Management System</a>
+            </h1>
+        </div>
+    </header>
+
+    <main class="auth-main">
+        <div class="container">
+            <div class="auth-container">
+                <div class="auth-card">
+                    <div class="auth-header">
+                        <h2><i class="fas fa-user-plus"></i> Create Account</h2>
+                        <p>Join our library community and start your reading journey today</p>
+                    </div>
+                    
+                    <form class="auth-form" id="signupForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <div class="input-group">
+                                    <i class="fas fa-user"></i>
+                                    <input type="text" id="firstName" name="firstName" required placeholder="Enter first name">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <div class="input-group">
+                                    <i class="fas fa-user"></i>
+                                    <input type="text" id="lastName" name="lastName" required placeholder="Enter last name">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <div class="input-group">
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" id="email" name="email" required placeholder="Enter your email">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Account Type</label>
+                            <div class="user-type-selection">
+                                <label class="radio-label">
+                                    <input type="radio" name="userType" value="user" checked>
+                                    <span class="radio-custom"></span>
+                                    <i class="fas fa-user"></i>
+                                    User
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="userType" value="admin">
+                                    <span class="radio-custom"></span>
+                                    <i class="fas fa-user-shield"></i>
+                                    Admin
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group" id="libraryIdField">
+                            <label for="libraryId">Library Card ID</label>
+                            <div class="input-group">
+                                <i class="fas fa-id-card"></i>
+                                <input type="text" id="libraryId" name="libraryId" placeholder="Create your Library Card ID" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <div class="input-group">
+                                <i class="fas fa-phone"></i>
+                                <input type="tel" id="phone" name="phone" required placeholder="Enter phone number">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <div class="input-group">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" id="password" name="password" required placeholder="Create a password">
+                                <button type="button" class="password-toggle" onclick="togglePassword()">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="password-strength">
+                                <div class="strength-bar">
+                                    <div class="strength-fill" id="strengthFill"></div>
+                                </div>
+                                <span class="strength-text" id="strengthText">Password strength</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <div class="input-group">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Confirm your password">
+                            </div>
+                        </div>
+                        
+                        <div class="form-options">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="terms" required>
+                                <span class="checkmark"></span>
+                                I agree to the <a href="#" target="_blank">Terms of Service</a> and <a href="#" target="_blank">Privacy Policy</a>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="newsletter">
+                                <span class="checkmark"></span>
+                                Subscribe to library updates and notifications
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-full">
+                            <i class="fas fa-user-plus"></i> Create Account
+                        </button>
+                    </form>
+                    
+                    <div class="auth-divider">
+                        <span>or</span>
+                    </div>
+                    
+                    <div class="social-login">
+                        <button class="btn btn-social btn-google">
+                            <i class="fab fa-google"></i> Sign up with Google
+                        </button>
+                        <button class="btn btn-social btn-microsoft">
+                            <i class="fab fa-microsoft"></i> Sign up with Microsoft
+                        </button>
+                    </div>
+                    
+                    <div class="auth-footer">
+                        <p>Already have an account? <a href="user-login.html">Login here</a></p>
+                    </div>
+                </div>
+                
+                <div class="auth-info">
+                    <div class="info-card">
+                        <h3><i class="fas fa-star"></i> Benefits of Joining</h3>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Access to thousands of books</li>
+                            <li><i class="fas fa-check"></i> Borrow up to 10 books at once</li>
+                            <li><i class="fas fa-check"></i> Reserve books in advance</li>
+                            <li><i class="fas fa-check"></i> Digital reading recommendations</li>
+                            <li><i class="fas fa-check"></i> Late return notifications</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3><i class="fas fa-shield-alt"></i> Secure & Private</h3>
+                        <p>Your personal information is protected with industry-standard encryption. We never share your data with third parties.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Library Management System. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/auth.js"></script>
+</body>
+</html>

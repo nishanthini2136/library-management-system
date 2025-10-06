@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - Library Management System</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/user-profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">
+                <i class="fas fa-book-open"></i>
+                <a href="index.html" style="color: white; text-decoration: none;">Library Management System</a>
+            </h1>
+            <nav id="navbar" class="nav"></nav>
+            <div class="user-controls">
+                <div class="user-profile">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" alt="User Avatar" class="avatar">
+                    <span>John Doe</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="profile-main">
+        <div class="container">
+            <!-- Profile Header -->
+            <section class="profile-header">
+                <div class="profile-cover">
+                    <div class="profile-avatar">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" alt="User Avatar" id="profileAvatar">
+                        <div class="avatar-overlay">
+                            <label for="avatarUpload" class="avatar-upload-btn">
+                                <i class="fas fa-camera"></i>
+                            </label>
+                            <input type="file" id="avatarUpload" accept="image/*" style="display: none;">
+                        </div>
+                    </div>
+                    <div class="profile-info">
+                        <h1>John Doe</h1>
+                        <p class="user-type">Student</p>
+                        <p class="user-id">Student ID: STU2024001</p>
+                        <div class="profile-stats">
+                            <div class="stat">
+                                <span class="stat-number">24</span>
+                                <span class="stat-label">Books Read</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">3</span>
+                                <span class="stat-label">Currently Borrowed</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">$0.00</span>
+                                <span class="stat-label">Fines</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Profile Content -->
+            <section class="profile-content">
+                <div class="profile-grid">
+                    <!-- Personal Information -->
+                    <div class="profile-card">
+                        <div class="card-header">
+                            <h2><i class="fas fa-user"></i> Personal Information</h2>
+                            <button class="btn btn-outline btn-sm" onclick="editPersonalInfo()">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="info-group">
+                                <label>Full Name</label>
+                                <p>John Doe</p>
+                            </div>
+                            <div class="info-group">
+                                <label>Email</label>
+                                <p>john.doe@university.edu</p>
+                            </div>
+                            <div class="info-group">
+                                <label>Phone</label>
+                                <p>+1 (555) 123-4567</p>
+                            </div>
+                            <div class="info-group">
+                                <label>Date of Birth</label>
+                                <p>March 15, 2000</p>
+                            </div>
+                            <div class="info-group">
+                                <label>Address</label>
+                                <p>123 University Ave, College Town, ST 12345</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Academic Information -->
+                    <div class="profile-card">
+                        <div class="card-header">
+                            <h2><i class="fas fa-graduation-cap"></i> Academic Information</h2>
+                            <button class="btn btn-outline btn-sm" onclick="editAcademicInfo()">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="info-group">
+                                <label>Student ID</label>
+                                <p>STU2024001</p>
+                            </div>
+                            <div class="info-group">
+                                <label>Program</label>
+                                <p>Bachelor of Computer Science</p>
+                            </div>
+                            <div class="info-group">
+                                <label>Year Level</label>
+                                <p>4th Year</p>
+                            </div>
+                            <div class="info-group">
+                                <label>Department</label>
+                                <p>Computer Science</p>
+                            </div>
+                            <div class="info-group">
+                                <label>Enrollment Date</label>
+                                <p>September 2020</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Library Preferences -->
+                    <div class="profile-card">
+                        <div class="card-header">
+                            <h2><i class="fas fa-cog"></i> Library Preferences</h2>
+                            <button class="btn btn-outline btn-sm" onclick="editPreferences()">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="info-group">
+                                <label>Preferred Language</label>
+                                <p>English</p>
+                            </div>
+                            <div class="info-group">
+                                <label>Notification Preferences</label>
+                                <p>Email & SMS</p>
+                            </div>
+                            <div class="info-group">
+                                <label>Reading Interests</label>
+                                <p>Technology, Science Fiction, Philosophy</p>
+                            </div>
+                            <div class="info-group">
+                                <label>Auto-renewal</label>
+                                <p>Enabled</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Account Security -->
+                    <div class="profile-card">
+                        <div class="card-header">
+                            <h2><i class="fas fa-shield-alt"></i> Account Security</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="security-item">
+                                <div class="security-info">
+                                    <i class="fas fa-lock"></i>
+                                    <div>
+                                        <h4>Password</h4>
+                                        <p>Last changed 3 months ago</p>
+                                    </div>
+                                </div>
+                                <button class="btn btn-outline btn-sm" onclick="changePassword()">
+                                    Change
+                                </button>
+                            </div>
+                            <div class="security-item">
+                                <div class="security-info">
+                                    <i class="fas fa-mobile-alt"></i>
+                                    <div>
+                                        <h4>Two-Factor Authentication</h4>
+                                        <p>Enabled</p>
+                                    </div>
+                                </div>
+                                <button class="btn btn-outline btn-sm" onclick="toggle2FA()">
+                                    Disable
+                                </button>
+                            </div>
+                            <div class="security-item">
+                                <div class="security-info">
+                                    <i class="fas fa-clock"></i>
+                                    <div>
+                                        <h4>Session Management</h4>
+                                        <p>2 active sessions</p>
+                                    </div>
+                                </div>
+                                <button class="btn btn-outline btn-sm" onclick="manageSessions()">
+                                    Manage
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reading History Summary -->
+                    <div class="profile-card wide">
+                        <div class="card-header">
+                            <h2><i class="fas fa-chart-line"></i> Reading Analytics</h2>
+                            <button class="btn btn-outline btn-sm" onclick="viewDetailedAnalytics()">
+                                <i class="fas fa-external-link-alt"></i> View Details
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="analytics-grid">
+                                <div class="analytics-item">
+                                    <div class="analytics-icon">
+                                        <i class="fas fa-book"></i>
+                                    </div>
+                                    <div class="analytics-content">
+                                        <h3>Total Books Read</h3>
+                                        <div class="analytics-number">24</div>
+                                        <div class="analytics-change positive">+3 this month</div>
+                                    </div>
+                                </div>
+                                <div class="analytics-item">
+                                    <div class="analytics-icon">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <div class="analytics-content">
+                                        <h3>Average Reading Time</h3>
+                                        <div class="analytics-number">2.5 hrs</div>
+                                        <div class="analytics-change positive">+0.3 hrs</div>
+                                    </div>
+                                </div>
+                                <div class="analytics-item">
+                                    <div class="analytics-icon">
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <div class="analytics-content">
+                                        <h3>Favorite Genre</h3>
+                                        <div class="analytics-number">Technology</div>
+                                        <div class="analytics-change neutral">8 books</div>
+                                    </div>
+                                </div>
+                                <div class="analytics-item">
+                                    <div class="analytics-icon">
+                                        <i class="fas fa-calendar-check"></i>
+                                    </div>
+                                    <div class="analytics-content">
+                                        <h3>Reading Streak</h3>
+                                        <div class="analytics-number">15 days</div>
+                                        <div class="analytics-change positive">Current</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div class="profile-card wide">
+                        <div class="card-header">
+                            <h2><i class="fas fa-history"></i> Recent Activity</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="activity-list">
+                                <div class="activity-item">
+                                    <div class="activity-icon">
+                                        <i class="fas fa-book"></i>
+                                    </div>
+                                    <div class="activity-content">
+                                        <h4>Book Borrowed</h4>
+                                        <p>1984 by George Orwell</p>
+                                        <span class="activity-time">2 days ago</span>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-icon">
+                                        <i class="fas fa-undo"></i>
+                                    </div>
+                                    <div class="activity-content">
+                                        <h4>Book Renewed</h4>
+                                        <p>The Great Gatsby by F. Scott Fitzgerald</p>
+                                        <span class="activity-time">1 week ago</span>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-icon">
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <div class="activity-content">
+                                        <h4>Book Rated</h4>
+                                        <p>To Kill a Mockingbird by Harper Lee - 5 stars</p>
+                                        <span class="activity-time">2 weeks ago</span>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-icon">
+                                        <i class="fas fa-bookmark"></i>
+                                    </div>
+                                    <div class="activity-content">
+                                        <h4>Book Reserved</h4>
+                                        <p>The Art of Computer Programming by Donald E. Knuth</p>
+                                        <span class="activity-time">3 weeks ago</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Library Management System. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/nav.js"></script>
+    <script src="js/user-profile.js"></script>
+</body>
+</html>

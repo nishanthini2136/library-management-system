@@ -1,0 +1,47 @@
+<svg width="300" height="400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Book cover background -->
+  <rect width="300" height="400" fill="#000000" />
+  
+  <!-- Book spine shadow -->
+  <rect x="10" y="10" width="280" height="380" fill="#0a0a0a" rx="5" ry="5" />
+  
+  <!-- Book cover -->
+  <rect x="15" y="15" width="270" height="370" fill="#121212" stroke="#1a1a1a" stroke-width="2" rx="3" ry="3" />
+  
+  <!-- Space background with stars -->
+  <g>
+    <circle cx="50" cy="50" r="1" fill="#ffffff" />
+    <circle cx="80" cy="30" r="1.5" fill="#ffffff" />
+    <circle cx="120" cy="70" r="1" fill="#ffffff" />
+    <circle cx="150" cy="40" r="2" fill="#ffffff" />
+    <circle cx="200" cy="60" r="1" fill="#ffffff" />
+    <circle cx="230" cy="30" r="1.5" fill="#ffffff" />
+    <circle cx="60" cy="100" r="1" fill="#ffffff" />
+    <circle cx="100" cy="120" r="1.5" fill="#ffffff" />
+    <circle cx="170" cy="110" r="1" fill="#ffffff" />
+    <circle cx="220" cy="90" r="2" fill="#ffffff" />
+    <circle cx="250" cy="130" r="1" fill="#ffffff" />
+    <circle cx="40" cy="160" r="1.5" fill="#ffffff" />
+    <circle cx="90" cy="180" r="1" fill="#ffffff" />
+    <circle cx="130" cy="150" r="2" fill="#ffffff" />
+    <circle cx="180" cy="170" r="1" fill="#ffffff" />
+    <circle cx="210" cy="140" r="1.5" fill="#ffffff" />
+    <circle cx="70" cy="210" r="1" fill="#ffffff" />
+    <circle cx="110" cy="230" r="1.5" fill="#ffffff" />
+    <circle cx="160" cy="200" r="1" fill="#ffffff" />
+    <circle cx="190" cy="220" r="2" fill="#ffffff" />
+    <circle cx="240" cy="190" r="1" fill="#ffffff" />
+  </g>
+  
+  <!-- Earth -->
+  <circle cx="150" cy="120" r="40" fill="#1a4d80" />
+  <path d="M120,100 Q150,80 180,100 Q150,140 120,100" fill="#2e8b57" opacity="0.7" />
+  <path d="M130,140 Q150,120 170,140 Q150,160 130,140" fill="#2e8b57" opacity="0.7" />
+  
+  <!-- Book title -->
+  <text x="150" y="220" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#ffffff">A BRIEF HISTORY</text>
+  <text x="150" y="245" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#ffffff">OF TIME</text>
+  
+  <!-- Author -->
+  <text x="150" y="280" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#cccccc">Stephen Hawking</text>
+</svg>

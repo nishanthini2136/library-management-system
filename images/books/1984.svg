@@ -1,0 +1,28 @@
+<svg width="300" height="400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Book cover background -->
+  <rect width="300" height="400" fill="#2c2c2c" />
+  
+  <!-- Book spine shadow -->
+  <rect x="10" y="10" width="280" height="380" fill="#1c1c1c" rx="5" ry="5" />
+  
+  <!-- Book cover -->
+  <rect x="15" y="15" width="270" height="370" fill="#252525" stroke="#1a1a1a" stroke-width="2" rx="3" ry="3" />
+  
+  <!-- Eye/Camera lens -->
+  <circle cx="150" cy="150" r="70" fill="#1a1a1a" stroke="#333333" stroke-width="5" />
+  <circle cx="150" cy="150" r="50" fill="#111111" stroke="#444444" stroke-width="3" />
+  <circle cx="150" cy="150" r="30" fill="#000000" />
+  <circle cx="135" cy="135" r="8" fill="#ffffff" opacity="0.6" />
+  
+  <!-- Book title -->
+  <text x="150" y="280" font-family="Arial, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="#ffffff">1984</text>
+  
+  <!-- Author -->
+  <text x="150" y="320" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#cccccc">George Orwell</text>
+  
+  <!-- Surveillance elements -->
+  <path d="M50,50 L70,40 L90,50 L70,60 Z" fill="#444444" />
+  <path d="M230,70 L250,60 L270,70 L250,80 Z" fill="#444444" />
+  <path d="M60,230 L80,220 L100,230 L80,240 Z" fill="#444444" />
+  <path d="M210,250 L230,240 L250,250 L230,260 Z" fill="#444444" />
+</svg>

@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Library Management System</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">
+                <i class="fas fa-book-open"></i>
+                <a href="index.html" style="color: white; text-decoration: none;">Library Management System</a>
+            </h1>
+            <nav id="navbar" class="nav"></nav>
+            <div class="admin-profile" id="adminProfile">
+                <div class="admin-avatar" onclick="toggleAdminMenu()">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" alt="Admin Avatar" id="adminAvatar">
+                </div>
+                <div class="admin-menu" id="adminMenu">
+                    <!-- Admin menu will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="admin-main">
+        <div class="container">
+            <!-- Admin Welcome Section -->
+            <section class="admin-welcome">
+                <div class="welcome-content">
+                    <h2>Welcome, <span id="adminName">Librarian</span>! 🏛️</h2>
+                    <p>Manage your library operations and monitor system performance.</p>
+                    <div class="admin-stats">
+                        <div class="stat-card">
+                            <i class="fas fa-books"></i>
+                            <div class="stat-info">
+                                <h3 id="totalBooks">0</h3>
+                                <p>Total Books</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-users"></i>
+                            <div class="stat-info">
+                                <h3 id="totalUsers">0</h3>
+                                <p>Active Users</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-book-open"></i>
+                            <div class="stat-info">
+                                <h3 id="borrowedBooks">0</h3>
+                                <p>Currently Borrowed</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <div class="stat-info">
+                                <h3 id="overdueBooks">0</h3>
+                                <p>Overdue Books</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quick Actions -->
+            <section class="quick-actions">
+                <div class="section-header">
+                    <h3><i class="fas fa-bolt"></i> Quick Actions</h3>
+                </div>
+                <div class="actions-grid">
+                    <button class="action-card" onclick="showAddBookModal()">
+                        <i class="fas fa-plus"></i>
+                        <h4>Add New Book</h4>
+                        <p>Add a new book to the catalog</p>
+                    </button>
+                    <button class="action-card" onclick="showIssueBookModal()">
+                        <i class="fas fa-hand-holding"></i>
+                        <h4>Issue Book</h4>
+                        <p>Issue a book to a user</p>
+                    </button>
+                    <button class="action-card" onclick="showReturnBookModal()">
+                        <i class="fas fa-undo"></i>
+                        <h4>Return Book</h4>
+                        <p>Process book returns</p>
+                    </button>
+                    <button class="action-card" onclick="showUserManagement()">
+                        <i class="fas fa-user-cog"></i>
+                        <h4>Manage Users</h4>
+                        <p>View and manage user accounts</p>
+                    </button>
+                    <button class="action-card" onclick="showFineManagement()">
+                        <i class="fas fa-dollar-sign"></i>
+                        <h4>Fine Management</h4>
+                        <p>Manage overdue fines</p>
+                    </button>
+                    <button class="action-card" onclick="generateReports()">
+                        <i class="fas fa-chart-bar"></i>
+                        <h4>Generate Reports</h4>
+                        <p>Create system reports</p>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Book Management -->
+            <section class="book-management">
+                <div class="section-header">
+                    <h3><i class="fas fa-books"></i> Book Management</h3>
+                    <div class="header-actions">
+                        <input type="text" id="bookSearch" placeholder="Search books..." class="search-input">
+                        <select id="bookFilter" class="filter-select">
+                            <option value="all">All Books</option>
+                            <option value="available">Available</option>
+                            <option value="borrowed">Borrowed</option>
+                            <option value="reserved">Reserved</option>
+                        </select>
+                        <button class="btn btn-primary" onclick="showAddBookModal()">Add Book</button>
+                    </div>
+                </div>
+                <div class="books-table-container">
+                    <table class="books-table" id="booksTable">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>ISBN</th>
+                                <th>Subject</th>
+                                <th>Copies</th>
+                                <th>Available</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="booksTableBody">
+                            <!-- Books will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- User Management -->
+            <section class="user-management">
+                <div class="section-header">
+                    <h3><i class="fas fa-users"></i> User Management</h3>
+                    <div class="header-actions">
+                        <input type="text" id="userSearch" placeholder="Search users..." class="search-input">
+                        <select id="userFilter" class="filter-select">
+                            <option value="all">All Users</option>
+                            <option value="student">Students</option>
+                            <option value="faculty">Faculty</option>
+                            <option value="active">Active</option>
+                            <option value="suspended">Suspended</option>
+                        </select>
+                        <button class="btn btn-primary" onclick="showAddUserModal()">Add User</button>
+                    </div>
+                </div>
+                <div class="users-table-container">
+                    <table class="users-table" id="usersTable">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Type</th>
+                                <th>Status</th>
+                                <th>Books Borrowed</th>
+                                <th>Fines</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTableBody">
+                            <!-- Users will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Transaction Management -->
+            <section class="transaction-management">
+                <div class="section-header">
+                    <h3><i class="fas fa-exchange-alt"></i> Transaction Management</h3>
+                    <div class="header-actions">
+                        <button class="btn btn-primary" onclick="showIssueBookModal()">Issue Book</button>
+                        <button class="btn btn-secondary" onclick="showReturnBookModal()">Return Book</button>
+                        <button class="btn btn-outline" onclick="showRenewalModal()">Renew Book</button>
+                    </div>
+                </div>
+                <div class="transactions-container">
+                    <div class="transaction-tabs">
+                        <button class="tab-btn active" onclick="showTransactionTab('recent')">Recent Transactions</button>
+                        <button class="tab-btn" onclick="showTransactionTab('overdue')">Overdue Books</button>
+                        <button class="tab-btn" onclick="showTransactionTab('fines')">Fine Records</button>
+                    </div>
+                    <div class="transaction-content" id="transactionContent">
+                        <!-- Transaction content will be populated by JavaScript -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Fine Management -->
+            <section class="fine-management">
+                <div class="section-header">
+                    <h3><i class="fas fa-dollar-sign"></i> Fine Management</h3>
+                    <div class="header-actions">
+                        <button class="btn btn-primary" onclick="calculateAllFines()">Calculate Fines</button>
+                        <button class="btn btn-secondary" onclick="showFineWaiverModal()">Waive Fine</button>
+                    </div>
+                </div>
+                <div class="fines-container" id="finesContainer">
+                    <!-- Fines will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Reports & Analytics -->
+            <section class="reports-analytics">
+                <div class="section-header">
+                    <h3><i class="fas fa-chart-line"></i> Reports & Analytics</h3>
+                    <div class="header-actions">
+                        <select id="reportPeriod" class="filter-select">
+                            <option value="week">This Week</option>
+                            <option value="month">This Month</option>
+                            <option value="quarter">This Quarter</option>
+                            <option value="year">This Year</option>
+                        </select>
+                        <button class="btn btn-primary" onclick="generateReport()">Generate Report</button>
+                        <button class="btn btn-outline" onclick="exportReport()">Export</button>
+                    </div>
+                </div>
+                <div class="analytics-grid">
+                    <div class="chart-container">
+                        <h4>Book Circulation Trends</h4>
+                        <div class="chart-placeholder" id="circulationChart">
+                            <p>Chart will be displayed here</p>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <h4>Popular Books</h4>
+                        <div class="chart-placeholder" id="popularBooksChart">
+                            <p>Chart will be displayed here</p>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <h4>User Activity</h4>
+                        <div class="chart-placeholder" id="userActivityChart">
+                            <p>Chart will be displayed here</p>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <h4>Fine Collection</h4>
+                        <div class="chart-placeholder" id="fineCollectionChart">
+                            <p>Chart will be displayed here</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Inventory Control -->
+            <section class="inventory-control">
+                <div class="section-header">
+                    <h3><i class="fas fa-boxes"></i> Inventory Control</h3>
+                    <div class="header-actions">
+                        <button class="btn btn-primary" onclick="showInventoryAudit()">Audit Inventory</button>
+                        <button class="btn btn-secondary" onclick="showDamagedBooks()">Report Damaged</button>
+                        <button class="btn btn-outline" onclick="showLostBooks()">Report Lost</button>
+                    </div>
+                </div>
+                <div class="inventory-stats">
+                    <div class="inventory-card">
+                        <h4>Total Inventory</h4>
+                        <div class="inventory-number" id="totalInventory">0</div>
+                        <p>Books in system</p>
+                    </div>
+                    <div class="inventory-card">
+                        <h4>Available</h4>
+                        <div class="inventory-number available" id="availableInventory">0</div>
+                        <p>Ready to borrow</p>
+                    </div>
+                    <div class="inventory-card">
+                        <h4>Borrowed</h4>
+                        <div class="inventory-number borrowed" id="borrowedInventory">0</div>
+                        <p>Currently out</p>
+                    </div>
+                    <div class="inventory-card">
+                        <h4>Reserved</h4>
+                        <div class="inventory-number reserved" id="reservedInventory">0</div>
+                        <p>On hold</p>
+                    </div>
+                    <div class="inventory-card">
+                        <h4>Damaged</h4>
+                        <div class="inventory-number damaged" id="damagedInventory">0</div>
+                        <p>Needs repair</p>
+                    </div>
+                    <div class="inventory-card">
+                        <h4>Lost</h4>
+                        <div class="inventory-number lost" id="lostInventory">0</div>
+                        <p>Unaccounted for</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Modals -->
+    <div class="modal" id="addBookModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3>Add New Book</h3>
+            <form id="addBookForm" class="admin-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="bookTitle">Book Title *</label>
+                        <input type="text" id="bookTitle" name="title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookAuthor">Author *</label>
+                        <input type="text" id="bookAuthor" name="author" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="bookISBN">ISBN</label>
+                        <input type="text" id="bookISBN" name="isbn">
+                    </div>
+                    <div class="form-group">
+                        <label for="bookSubject">Subject</label>
+                        <select id="bookSubject" name="subject">
+                            <option value="">Select Subject</option>
+                            <option value="fiction">Fiction</option>
+                            <option value="non-fiction">Non-Fiction</option>
+                            <option value="science">Science</option>
+                            <option value="technology">Technology</option>
+                            <option value="history">History</option>
+                            <option value="philosophy">Philosophy</option>
+                            <option value="literature">Literature</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="bookCopies">Number of Copies *</label>
+                        <input type="number" id="bookCopies" name="copies" min="1" value="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookLocation">Shelf Location</label>
+                        <input type="text" id="bookLocation" name="location" placeholder="e.g., F-FIT">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="bookDescription">Description</label>
+                    <textarea id="bookDescription" name="description" rows="3"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-outline" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Add Book</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="issueBookModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3>Issue Book</h3>
+            <form id="issueBookForm" class="admin-form">
+                <div class="form-group">
+                    <label for="issueUser">Select User *</label>
+                    <select id="issueUser" name="userId" required>
+                        <option value="">Select User</option>
+                        <!-- Users will be populated by JavaScript -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="issueBook">Select Book *</label>
+                    <select id="issueBook" name="bookId" required>
+                        <option value="">Select Book</option>
+                        <!-- Available books will be populated by JavaScript -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="issueDate">Issue Date *</label>
+                    <input type="date" id="issueDate" name="issueDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="dueDate">Due Date *</label>
+                    <input type="date" id="dueDate" name="dueDate" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-outline" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Issue Book</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="returnBookModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3>Return Book</h3>
+            <form id="returnBookForm" class="admin-form">
+                <div class="form-group">
+                    <label for="returnUser">Select User *</label>
+                    <select id="returnUser" name="userId" required onchange="loadUserBorrowedBooks()">
+                        <option value="">Select User</option>
+                        <!-- Users will be populated by JavaScript -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="returnBook">Select Book *</label>
+                    <select id="returnBook" name="bookId" required>
+                        <option value="">Select Book</option>
+                        <!-- Borrowed books will be populated by JavaScript -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="returnDate">Return Date *</label>
+                    <input type="date" id="returnDate" name="returnDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="fineAmount">Fine Amount</label>
+                    <input type="number" id="fineAmount" name="fineAmount" min="0" step="0.01" readonly>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-outline" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Process Return</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Library Management System. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/nav.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

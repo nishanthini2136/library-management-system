@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Catalog - Library Management System</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/catalog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">
+                <i class="fas fa-book-open"></i>
+                <a href="index.html" style="color: white; text-decoration: none;">Library Management System</a>
+            </h1>
+            <nav id="navbar" class="nav"></nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="catalog-hero">
+            <div class="container">
+                <h2>Book Catalog</h2>
+                <p>Discover thousands of books across various subjects and genres</p>
+            </div>
+        </section>
+
+        <section class="search-section">
+            <div class="container">
+                <div class="search-container">
+                    <div class="search-box">
+                        <div class="search-input-group">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="searchInput" placeholder="Search by title, author, subject, or ISBN...">
+                            <button type="button" class="search-btn">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="search-filters">
+                        <div class="filter-group">
+                            <label for="subjectFilter">Subject:</label>
+                            <select id="subjectFilter">
+                                <option value="">All Subjects</option>
+                                <option value="fiction">Fiction</option>
+                                <option value="non-fiction">Non-Fiction</option>
+                                <option value="science">Science</option>
+                                <option value="history">History</option>
+                                <option value="technology">Technology</option>
+                                <option value="literature">Literature</option>
+                                <option value="philosophy">Philosophy</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="availabilityFilter">Availability:</label>
+                            <select id="availabilityFilter">
+                                <option value="">All Books</option>
+                                <option value="available">Available</option>
+                                <option value="borrowed">Borrowed</option>
+                                <option value="reserved">Reserved</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="sortBy">Sort By:</label>
+                            <select id="sortBy">
+                                <option value="title">Title A-Z</option>
+                                <option value="author">Author A-Z</option>
+                                <option value="date">Publication Date</option>
+                                <option value="popularity">Popularity</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="catalog-results">
+            <div class="container">
+                <div class="results-header">
+                    <div class="results-count">
+                        <span id="resultsCount">Showing 1-20 of 1,247 books</span>
+                    </div>
+                    <div class="view-options">
+                        <button class="view-btn active" data-view="grid">
+                            <i class="fas fa-th"></i>
+                        </button>
+                        <button class="view-btn" data-view="list">
+                            <i class="fas fa-list"></i>
+                        </button>
+                    </div>
+                </div>
+                <div id="categoryBar"></div>
+
+                <div class="books-container" id="booksContainer">
+                    <!-- Books will be loaded dynamically from the API -->
+                    <div class="loading-message" id="loadingMessage">
+                        <div class="loading-spinner">
+                            <i class="fas fa-spinner fa-spin"></i>
+                        </div>
+                        <p>Loading books...</p>
+                    </div>
+                    
+                    <div class="no-books-message" id="noBooksMessage" style="display: none;">
+                        <div class="empty-state">
+                            <i class="fas fa-book-open"></i>
+                            <h3>No books found</h3>
+                            <p>Try adjusting your search criteria or browse different categories.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Catalog image container removed as requested -->
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 Library Management System. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/nav.js"></script>
+    <script src="js/catalog.js"></script>
+</body>
+</html>

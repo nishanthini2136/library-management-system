@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard - Library Management System</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/user-dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">
+                <i class="fas fa-book-open"></i>
+                <a href="index.html" style="color: white; text-decoration: none;">Library Management System</a>
+            </h1>
+            <nav id="navbar" class="nav"></nav>
+            <div class="user-profile" id="userProfile">
+                <div class="user-avatar" onclick="toggleUserMenu()">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" alt="User Avatar" id="userAvatar">
+                </div>
+                <div class="user-menu" id="userMenu">
+                    <!-- User menu will be populated by JavaScript -->
+                </div>
+            </div>
+            <img src="images/logo.svg" alt="Library Logo" class="dashboard-fixed-logo">
+        </div>
+    </header><br>
+
+    <main class="dashboard-main">
+        <div class="container">
+            <!-- Overview Section -->
+            <section class="stats-section" id="overviewSection">
+                <div class="section-header">
+                    <h3><i class="fas fa-chart-pie"></i> Library Overview</h3>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-layer-group"></i></div>
+                        <div class="stat-content">
+                            <h3>Total Books by Category</h3>
+                            <div id="booksByCategory"></div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-book"></i></div>
+                        <div class="stat-content">
+                            <h3>Borrowed Books</h3>
+                            <div class="stat-number" id="borrowedBooksCount">0</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-user-check"></i></div>
+                        <div class="stat-content">
+                            <h3>Users Paid Fines</h3>
+                            <div class="stat-number" id="finesPaidUsers">0</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-user-times"></i></div>
+                        <div class="stat-content">
+                            <h3>Users Unpaid Fines</h3>
+                            <div class="stat-number" id="finesUnpaidUsers">0</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-undo-alt"></i></div>
+                        <div class="stat-content">
+                            <h3>Returned Books</h3>
+                            <div class="stat-number" id="returnedBooksCount">0</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Fines Lists -->
+            <section class="fines-section">
+                <div class="section-header">
+                    <h3><i class="fas fa-wallet"></i> Fines Status</h3>
+                </div>
+                <div class="history-table-container">
+                    <table class="history-table">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Status</th>
+                                <th>Amount</th>
+                                <th>Updated</th>
+                            </tr>
+                        </thead>
+                        <tbody id="paidFinesBody"></tbody>
+                    </table>
+                </div>
+                <br/>
+                <div class="history-table-container">
+                    <table class="history-table">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Status</th>
+                                <th>Amount</th>
+                                <th>Updated</th>
+                            </tr>
+                        </thead>
+                        <tbody id="unpaidFinesBody"></tbody>
+                    </table>
+                </div>
+            </section>
+            <!-- Welcome Section -->
+            <section class="welcome-section">
+                <div class="welcome-content">
+                    <h2>Welcome back, <span id="userName">Student</span>! </h2>
+                    <p>Here's what's happening with your library account today.</p>
+                    <div class="quick-stats">
+                        <div class="stat-card">
+                            <i class="fas fa-book-open"></i>
+                            <div class="stat-info">
+                                <h3 id="borrowedCount">0</h3>
+                                <p>Books Borrowed</p>
+                            </div>
+                        </div><br>
+                        <div class="stat-card">
+                            <i class="fas fa-clock"></i>
+                            <div class="stat-info">
+                                <h3 id="dueSoonCount">0</h3>
+                                <p>Due Soon</p>
+                            </div>
+                        </div><br>
+                        <div class="stat-card">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <div class="stat-info">
+                                <h3 id="overdueCount">0</h3>
+                                <p>Overdue</p>
+                            </div>
+                        </div><br>
+                        <div class="stat-card">
+                            <i class="fas fa-bookmark"></i>
+                            <div class="stat-info">
+                                <h3 id="reservedCount">0</h3>
+                                <p>Reserved</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Notifications Section -->
+            <section class="notifications-section">
+                <div class="section-header">
+                    <h3><i class="fas fa-bell"></i> Notifications & Alerts</h3>
+                    <button class="btn btn-outline" onclick="markAllAsRead()">Mark All as Read</button>
+                </div>
+                <div class="notifications-container" id="notificationsContainer">
+                    <!-- Notifications will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Currently Borrowed Books -->
+            <section class="borrowed-books-section">
+                <div class="section-header">
+                    <h3><i class="fas fa-book-open"></i> Currently Borrowed Books</h3>
+                    <a href="catalog.html" class="btn btn-primary">Borrow More Books</a>
+                </div>
+                <div class="books-grid" id="borrowedBooksGrid">
+                    <!-- Borrowed books will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Reserved Books -->
+            <section class="reserved-books-section">
+                <div class="section-header">
+                    <h3><i class="fas fa-bookmark"></i> Reserved Books</h3>
+                </div>
+                <div class="books-grid" id="reservedBooksGrid">
+                    <!-- Reserved books will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Reading History -->
+            <section class="reading-history-section">
+                <div class="section-header">
+                    <h3><i class="fas fa-history"></i> Reading History</h3>
+                    <div class="history-filters">
+                        <select id="historyFilter" onchange="filterReadingHistory()">
+                            <option value="all">All Time</option>
+                            <option value="month">This Month</option>
+                            <option value="quarter">This Quarter</option>
+                            <option value="year">This Year</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="history-table-container">
+                    <table class="history-table" id="readingHistoryTable">
+                        <thead>
+                            <tr>
+                                <th>Book Title</th>
+                                <th>Author</th>
+                                <th>Borrowed Date</th>
+                                <th>Returned Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="readingHistoryBody">
+                            <!-- Reading history will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Fine Management -->
+            <section class="fines-section">
+                <div class="section-header">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Fine Management</h3>
+                </div>
+                <div class="fines-container" id="finesContainer">
+                    <!-- Fines will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Reading Recommendations -->
+            <section class="recommendations-section">
+                <div class="section-header">
+                    <h3><i class="fas fa-lightbulb"></i> Recommended for You</h3>
+                    <a href="catalog.html" class="btn btn-outline">View All</a>
+                </div>
+                <div class="books-grid" id="recommendationsGrid">
+                    <!-- Recommendations will be populated by JavaScript -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Modals -->
+    <div class="modal" id="bookDetailsModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="bookDetailsContent">
+                <!-- Book details will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="renewModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3>Renew Book</h3>
+            <div id="renewContent">
+                <!-- Renew content will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Library Management System. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/nav.js"></script>
+    <script src="js/user-dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<svg width="300" height="400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Book cover background -->
+  <rect width="300" height="400" fill="#f7e9c3" />
+  
+  <!-- Book spine shadow -->
+  <rect x="10" y="10" width="280" height="380" fill="#e6d8b2" rx="5" ry="5" />
+  
+  <!-- Book cover -->
+  <rect x="15" y="15" width="270" height="370" fill="#f0e6c3" stroke="#d9c99e" stroke-width="2" rx="3" ry="3" />
+  
+  <!-- Art deco design elements -->
+  <rect x="25" y="25" width="250" height="350" fill="none" stroke="#d4af37" stroke-width="3" />
+  <rect x="35" y="35" width="230" height="330" fill="none" stroke="#d4af37" stroke-width="1" />
+  
+  <!-- Eye symbol -->
+  <ellipse cx="150" cy="120" rx="60" ry="40" fill="#4682b4" opacity="0.8" />
+  <ellipse cx="150" cy="120" rx="25" ry="25" fill="#000000" />
+  <ellipse cx="140" cy="110" rx="8" ry="8" fill="#ffffff" />
+  
+  <!-- Book title -->
+  <text x="150" y="220" font-family="Georgia, serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#d4af37">THE</text>
+  <text x="150" y="250" font-family="Georgia, serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#d4af37">GREAT GATSBY</text>
+  
+  <!-- Author -->
+  <text x="150" y="290" font-family="Georgia, serif" font-size="16" text-anchor="middle" fill="#333333">F. Scott Fitzgerald</text>
+  
+  <!-- Art deco corner elements -->
+  <path d="M35,35 L55,35 L55,55 L35,55 Z" fill="#d4af37" />
+  <path d="M245,35 L265,35 L265,55 L245,55 Z" fill="#d4af37" />
+  <path d="M35,345 L55,345 L55,365 L35,365 Z" fill="#d4af37" />
+  <path d="M245,345 L265,345 L265,365 L245,365 Z" fill="#d4af37" />
+</svg>

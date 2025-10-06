@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">
+                <i class="fas fa-book-open"></i>
+                Library Management System
+            </h1>
+            <nav id="navbar" class="nav"></nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-background">
+                <div class="hero-overlay"></div>
+            </div>
+            <div class="container">
+                <div class="hero-content">
+                    <h2>Welcome to Our Digital Library</h2>
+                    <p>Discover thousands of books, manage your reading journey, and explore knowledge at your fingertips.</p>
+                    <div class="hero-buttons">
+                        <a href="user-signup.html" class="btn btn-primary btn-large">Get Started</a>
+                        <a href="catalog.html" class="btn btn-outline btn-large">Browse Books</a>
+                    </div>
+                </div>
+               
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2 class="section-title">Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-search"></i>
+                        <h3>Book Search</h3>
+                        <p>Find books by title, author, subject, or ISBN with our advanced search system.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-bookmark"></i>
+                        <h3>Borrow & Reserve</h3>
+                        <p>Borrow available books or reserve them for later pickup.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-bell"></i>
+                        <h3>Smart Notifications</h3>
+                        <p>Get timely reminders for due dates and overdue fines.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Reading Analytics</h3>
+                        <p>Track your reading progress and borrowing history.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="catalog" class="catalog-preview">
+            <div class="container">
+                <h2 class="section-title">Featured Books</h2>
+                <div class="books-grid">
+                    <div class="book-card">
+                        <div class="book-cover">
+                            <img src="https://cdn-icons-png.flaticon.com/512/2702/2702134.png" alt="Book Cover" class="book-cover-img">
+                        </div>
+                        <div class="book-info">
+                            <h3>The Great Gatsby</h3>
+                            <p class="author">F. Scott Fitzgerald</p>
+                            <p class="subject">Fiction</p>
+                            <span class="status available">Available</span>
+                        </div>
+                    </div>
+                    <div class="book-card">
+                        <div class="book-cover">
+                            <img src="https://cdn-icons-png.flaticon.com/512/2702/2702134.png" alt="Book Cover" class="book-cover-img">
+                        </div>
+                        <div class="book-info">
+                            <h3>To Kill a Mockingbird</h3>
+                            <p class="author">Harper Lee</p>
+                            <p class="subject">Fiction</p>
+                            <span class="status borrowed">Borrowed</span>
+                        </div>
+                    </div>
+                    <div class="book-card">
+                        <div class="book-cover">
+                            <img src="https://cdn-icons-png.flaticon.com/512/2702/2702134.png" alt="Book Cover" class="book-cover-img">
+                        </div>
+                        <div class="book-info">
+                            <h3>1984</h3>
+                            <p class="author">George Orwell</p>
+                            <p class="subject">Fiction</p>
+                            <span class="status available">Available</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="catalog-actions">
+                    <a href="catalog.html" class="btn btn-primary">View Full Catalog</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Library Management System</h3>
+                    <p>Empowering education through digital library management.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="catalog.html">Catalog</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="user-dashboard.html">Dashboard</a></li>
+                        <li><a href="user-login.html">User Login</a></li>
+                        <li><a href="admin-login.html">Admin Login</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: library@university.edu</p>
+                    <p>Phone: (555) 123-4567</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Library Management System. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/nav.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

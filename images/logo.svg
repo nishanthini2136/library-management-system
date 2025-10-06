@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" width="120" height="40">
+  <rect x="5" y="10" width="30" height="25" rx="3" fill="#667eea" stroke="#4a5568" stroke-width="1"/>
+  <rect x="8" y="13" width="24" height="19" rx="2" fill="#f7fafc"/>
+  <line x1="12" y1="18" x2="28" y2="18" stroke="#4a5568" stroke-width="1"/>
+  <line x1="12" y1="22" x2="28" y2="22" stroke="#4a5568" stroke-width="1"/>
+  <line x1="12" y1="26" x2="24" y2="26" stroke="#4a5568" stroke-width="1"/>
+  <circle cx="32" cy="15" r="4" fill="#f56565"/>
+  <text x="32" y="17" text-anchor="middle" fill="white" font-size="6" font-weight="bold">L</text>
+  <text x="45" y="25" fill="#667eea" font-size="12" font-weight="bold" font-family="Arial, sans-serif">Library</text>
+</svg>
