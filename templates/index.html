@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System - Digital Library Platform</title>
+    <link rel="stylesheet" href="styles/modern-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-book-reader"></i>
+                <span>LibraryMS</span>
+            </a>
+            <nav class="nav">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#features" class="nav-link">Features</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="catalog.html" class="nav-link">Catalog</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="user-login.html" class="btn btn-outline btn-sm">Sign In</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero hero-with-bg">
+            <div class="hero-background"></div>
+            <div class="hero-overlay"></div>
+            <div class="container">
+                <div class="hero-content animate-fade-in">
+                    <h1>Welcome to Our Digital Library</h1>
+                    <p>Discover thousands of books, manage your reading journey, and explore knowledge at your fingertips. Join our community of readers and unlock unlimited access to digital resources.</p>
+                    <div class="hero-buttons">
+                        <a href="user-signup.html" class="btn btn-primary btn-xl">
+                            <i class="fas fa-rocket"></i>
+                            Get Started Free
+                        </a>
+                        <a href="catalog.html" class="btn btn-outline btn-xl">
+                            <i class="fas fa-search"></i>
+                            Browse Books
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="section">
+            <div class="container">
+                <h2 class="section-title">Why Choose Our Library?</h2>
+                <div class="features-grid">
+                    <div class="feature-card animate-slide-up">
+                        <i class="fas fa-search"></i>
+                        <h3>Smart Search</h3>
+                        <p>Find books instantly with our AI-powered search. Filter by title, author, genre, or even search by description to discover your next great read.</p>
+                    </div>
+                    <div class="feature-card animate-slide-up">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h3>Mobile Access</h3>
+                        <p>Access your library anywhere, anytime. Our responsive platform works seamlessly on desktop, tablet, and mobile devices.</p>
+                    </div>
+                    <div class="feature-card animate-slide-up">
+                        <i class="fas fa-bookmark"></i>
+                        <h3>Easy Management</h3>
+                        <p>Borrow books, track due dates, and manage your reading list effortlessly. Get notifications for new arrivals and reservation updates.</p>
+                    </div>
+                    <div class="feature-card animate-slide-up">
+                        <i class="fas fa-users"></i>
+                        <h3>Community Hub</h3>
+                        <p>Join reading groups, share reviews, and get personalized recommendations from our vibrant community of book lovers.</p>
+                    </div>
+                    <div class="feature-card animate-slide-up">
+                        <i class="fas fa-clock"></i>
+                        <h3>24/7 Availability</h3>
+                        <p>Never worry about library hours again. Access digital resources round the clock and read at your own pace.</p>
+                    </div>
+                    <div class="feature-card animate-slide-up">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Secure Platform</h3>
+                        <p>Your data is protected with enterprise-grade security. Enjoy peace of mind while exploring our vast collection.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="stats" class="section" style="background: var(--light-gray);">
+            <div class="container">
+                <h2 class="section-title">Our Impact in Numbers</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalBooks">15,000+</div>
+                        <p class="stat-label">Digital & Physical Books</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalMembers">8,500+</div>
+                        <p class="stat-label">Active Members</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalBorrows">125,000+</div>
+                        <p class="stat-label">Books Borrowed This Year</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="satisfaction">99.2%</div>
+                        <p class="stat-label">Member Satisfaction</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cta" class="section">
+            <div class="container">
+                <div class="hero-content">
+                    <h2>Start Your Reading Journey</h2>
+                    <p>Join thousands of readers and access our digital library today.</p>
+                    <div class="hero-buttons">
+                        <a href="user-signup.html" class="btn btn-primary btn-lg">Get Started</a>
+                        <a href="user-login.html" class="btn btn-outline btn-lg">Sign In</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-4">
+                    <h5>LibraryMS</h5>
+                    <p>Digital library management made simple.</p>
+                </div>
+                <div class="col-2">
+                    <h5>Quick Links</h5>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: var(--spacing-2);"><a href="about.html">About Us</a></li>
+                        <li style="margin-bottom: var(--spacing-2);"><a href="catalog.html">Browse Books</a></li>
+                        <li style="margin-bottom: var(--spacing-2);"><a href="contact.html">Contact</a></li>
+                        <li style="margin-bottom: var(--spacing-2);"><a href="user-signup.html">Sign Up</a></li>
+                    </ul>
+                </div>
+                <div class="col-2">
+                    <h5>Services</h5>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: var(--spacing-2);"><a href="#">Digital Library</a></li>
+                        <li style="margin-bottom: var(--spacing-2);"><a href="#">Book Reservations</a></li>
+                        <li style="margin-bottom: var(--spacing-2);"><a href="#">Reading Groups</a></li>
+                        <li style="margin-bottom: var(--spacing-2);"><a href="#">Mobile App</a></li>
+                    </ul>
+                </div>
+                <div class="col-4">
+                    <h5>Contact Info</h5>
+                    <p><i class="fas fa-envelope" style="margin-right: var(--spacing-2);"></i> info@libraryms.com</p>
+                    <p><i class="fas fa-phone" style="margin-right: var(--spacing-2);"></i> (555) 123-4567</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Library Management System. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Enhanced scroll animations and interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe all feature cards and stats
+            document.querySelectorAll('.feature-card, .stat-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'all 0.6s ease-out';
+                observer.observe(card);
+            });
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const target = document.querySelector(targetId);
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

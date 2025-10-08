@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Library Management System</title>
+    <link rel="stylesheet" href="styles/auth-clean.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <h1>Admin Access</h1>
+                <p>Library Management System</p>
+            </div>
+                    
+            <form class="login-form" id="adminLoginForm">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required placeholder="admin">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required placeholder="••••••">
+                </div>
+                
+                <div class="form-group checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="remember">
+                        <span class="checkmark"></span>
+                        Remember this device
+                    </label>
+                </div>
+                
+                <button type="submit" class="login-btn">
+                    <i class="fas fa-shield-alt"></i>
+                    Admin Sign In
+                </button>
+            </form>
+            
+            <div class="login-footer">
+                <p>Regular user? <a href="user-login.html">Sign in here</a></p>
+                <p><a href="index.html">← Back to Home</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth-clean.js"></script>
+</body>
+</html>

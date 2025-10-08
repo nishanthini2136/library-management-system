@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Central Library - Dashboard</title>
+    <link rel="stylesheet" href="styles/dashboard-modern.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class="fas fa-book-open"></i>
+                <span>Central Library</span>
+            </div>
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <div class="user-profile">
+            <div class="user-avatar">
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face" alt="Himanshu Ranjan">
+            </div>
+            <div class="user-info">
+                <h4>Himanshu Ranjan</h4>
+                <span class="status online">Online</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <ul>
+                <li class="nav-item active">
+                    <a href="#" class="nav-link" data-page="dashboard">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-page="transaction">
+                        <i class="fas fa-exchange-alt"></i>
+                        <span>Transaction</span>
+                        <i class="fas fa-chevron-down arrow"></i>
+                    </a>
+                    <ul class="sub-menu">
+                        <li><a href="#" data-page="borrow"><i class="fas fa-book"></i> Borrow</a></li>
+                        <li><a href="#" data-page="return"><i class="fas fa-undo"></i> Return</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-page="books">
+                        <i class="fas fa-books"></i>
+                        <span>Books</span>
+                        <i class="fas fa-chevron-down arrow"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-page="students">
+                        <i class="fas fa-user-graduate"></i>
+                        <span>Students</span>
+                        <i class="fas fa-chevron-down arrow"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Header -->
+        <header class="top-header">
+            <div class="header-left">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="page-title">Dashboard</h1>
+            </div>
+            <div class="header-right">
+                <div class="header-actions">
+                    <button class="action-btn">
+                        <i class="fas fa-home"></i>
+                        Home
+                    </button>
+                    <button class="action-btn active">
+                        Dashboard
+                    </button>
+                </div>
+                <div class="user-menu">
+                    <div class="user-avatar">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face" alt="Himanshu Ranjan">
+                    </div>
+                    <span class="user-name">Himanshu Ranjan</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <div class="dashboard-content">
+            <!-- Statistics Cards -->
+            <div class="stats-grid">
+                <div class="stat-card blue">
+                    <div class="stat-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 class="stat-number">4</h3>
+                        <p class="stat-label">Total Books</p>
+                        <button class="more-info">More Info <i class="fas fa-arrow-circle-right"></i></button>
+                    </div>
+                </div>
+
+                <div class="stat-card green">
+                    <div class="stat-icon">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 class="stat-number">9</h3>
+                        <p class="stat-label">Total Students</p>
+                        <button class="more-info">More Info <i class="fas fa-arrow-circle-right"></i></button>
+                    </div>
+                </div>
+
+                <div class="stat-card orange">
+                    <div class="stat-icon">
+                        <i class="fas fa-undo"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 class="stat-number">2</h3>
+                        <p class="stat-label">Returned Today</p>
+                        <button class="more-info">More Info <i class="fas fa-arrow-circle-right"></i></button>
+                    </div>
+                </div>
+
+                <div class="stat-card red">
+                    <div class="stat-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 class="stat-number">5</h3>
+                        <p class="stat-label">Borrowed Today</p>
+                        <button class="more-info">More Info <i class="fas fa-arrow-circle-right"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Monthly Transaction Report -->
+            <div class="chart-section">
+                <div class="chart-header">
+                    <h2>Monthly Transaction Report</h2>
+                    <div class="chart-controls">
+                        <label for="yearSelect">Select Year:</label>
+                        <select id="yearSelect" class="year-select">
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                            <option value="2022">2022</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="chart-legend">
+                    <div class="legend-item">
+                        <span class="legend-color borrow"></span>
+                        <span>Borrow</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color return"></span>
+                        <span>Return</span>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="transactionChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Borrow Books Page (Hidden by default) -->
+    <div class="page-content" id="borrowPage" style="display: none;">
+        <div class="page-header">
+            <h1>Borrow Books</h1>
+            <div class="breadcrumb">
+                <a href="#" data-page="dashboard"><i class="fas fa-home"></i> Home</a>
+                <span>Transaction</span>
+                <span>Borrow</span>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <div class="card-header">
+                <button class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Borrow
+                </button>
+            </div>
+
+            <div class="table-controls">
+                <div class="show-entries">
+                    <label>Show 
+                        <select class="entries-select">
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                        entries
+                    </label>
+                </div>
+                <div class="search-box">
+                    <label>Search: 
+                        <input type="text" class="search-input" placeholder="">
+                    </label>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Date <i class="fas fa-sort"></i></th>
+                            <th>Student ID <i class="fas fa-sort"></i></th>
+                            <th>Name <i class="fas fa-sort"></i></th>
+                            <th>ISBN <i class="fas fa-sort"></i></th>
+                            <th>Title <i class="fas fa-sort"></i></th>
+                            <th>Status <i class="fas fa-sort"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Aug 19, 2024</td>
+                            <td>LOU369872540</td>
+                            <td>Himanshu Ranjan</td>
+                            <td>4565666</td>
+                            <td>qwerty</td>
+                            <td><span class="status-badge returned">returned</span></td>
+                        </tr>
+                        <tr>
+                            <td>Aug 19, 2024</td>
+                            <td>LOU369872540</td>
+                            <td>Himanshu Ranjan</td>
+                            <td>4565666</td>
+                            <td>qwerty</td>
+                            <td><span class="status-badge not-returned">not returned</span></td>
+                        </tr>
+                        <tr>
+                            <td>Aug 19, 2024</td>
+                            <td>ALFR72034158</td>
+                            <td>Namita Ranjan</td>
+                            <td>159420229X</td>
+                            <td>Moonwalking with Einstein: The Art and Science of Remembering Everything</td>
+                            <td><span class="status-badge returned">returned</span></td>
+                        </tr>
+                        <tr>
+                            <td>Aug 19, 2024</td>
+                            <td>PFL238674115</td>
+                            <td>Surendra Singh</td>
+                            <td>159420229X</td>
+                            <td>Moonwalking with Einstein: The Art and Science of Remembering Everything</td>
+                            <td><span class="status-badge not-returned">not returned</span></td>
+                        </tr>
+                        <tr>
+                            <td>Aug 19, 2024</td>
+                            <td>PFL238674115</td>
+                            <td>Surendra Singh</td>
+                            <td>bookishfirst</td>
+                            <td>Calculus Made Easy</td>
+                            <td><span class="status-badge not-returned">not returned</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="table-footer">
+                <div class="showing-info">
+                    Showing 1 to 5 of 5 entries
+                </div>
+                <div class="pagination">
+                    <button class="page-btn" disabled>Previous</button>
+                    <button class="page-btn active">1</button>
+                    <button class="page-btn" disabled>Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/dashboard-modern.js"></script>
+</body>
+</html>

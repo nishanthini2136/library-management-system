@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Dashboard - Library Management System</title>
+    <link rel="stylesheet" href="styles/modern-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Dashboard-specific styles */
+        .dashboard-header {
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        
+        .dashboard-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--spacing-4);
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-3);
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-full);
+            background: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 600;
+        }
+        
+        .welcome-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            padding: var(--spacing-12) 0;
+        }
+        
+        .welcome-content {
+            text-align: center;
+        }
+        
+        .welcome-content h1 {
+            color: var(--white);
+            margin-bottom: var(--spacing-4);
+        }
+        
+        .welcome-content p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: var(--font-size-lg);
+        }
+        
+        .dashboard-content {
+            padding: var(--spacing-8) 0;
+        }
+        
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-6);
+            margin-bottom: var(--spacing-12);
+        }
+        
+        .action-card {
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-6);
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: all var(--transition-base);
+            cursor: pointer;
+        }
+        
+        .action-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .action-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--spacing-4);
+            font-size: var(--font-size-2xl);
+            color: var(--white);
+        }
+        
+        .action-card:nth-child(1) .action-icon { background: var(--primary-color); }
+        .action-card:nth-child(2) .action-icon { background: var(--success-color); }
+        .action-card:nth-child(3) .action-icon { background: var(--info-color); }
+        .action-card:nth-child(4) .action-icon { background: var(--warning-color); }
+        
+        .recent-activity {
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+        
+        .activity-header {
+            padding: var(--spacing-6);
+            border-bottom: 1px solid var(--gray-200);
+            background: var(--gray-50);
+        }
+        
+        .activity-list {
+            padding: 0;
+        }
+        
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-4);
+            padding: var(--spacing-4) var(--spacing-6);
+            border-bottom: 1px solid var(--gray-100);
+            transition: background-color var(--transition-fast);
+        }
+        
+        .activity-item:hover {
+            background: var(--gray-50);
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-sm);
+            color: var(--white);
+        }
+        
+        .activity-borrowed .activity-icon { background: var(--success-color); }
+        .activity-returned .activity-icon { background: var(--info-color); }
+        .activity-reserved .activity-icon { background: var(--warning-color); }
+        .activity-overdue .activity-icon { background: var(--danger-color); }
+        
+        .activity-content {
+            flex: 1;
+        }
+        
+        .activity-title {
+            font-weight: 500;
+            margin-bottom: var(--spacing-1);
+        }
+        
+        .activity-meta {
+            font-size: var(--font-size-sm);
+            color: var(--gray-600);
+        }
+        
+        .borrowed-books {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--spacing-6);
+        }
+        
+        .book-item {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: all var(--transition-base);
+        }
+        
+        .book-item:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .book-cover {
+            height: 120px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: var(--font-size-3xl);
+        }
+        
+        .book-details {
+            padding: var(--spacing-4);
+        }
+        
+        .book-title {
+            font-weight: 600;
+            margin-bottom: var(--spacing-2);
+        }
+        
+        .book-author {
+            color: var(--gray-600);
+            margin-bottom: var(--spacing-3);
+        }
+        
+        .book-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: var(--font-size-sm);
+        }
+        
+        .due-date {
+            color: var(--warning-color);
+            font-weight: 500;
+        }
+        
+        .overdue {
+            color: var(--danger-color);
+        }
+        
+        @media (max-width: 768px) {
+            .dashboard-nav {
+                flex-direction: column;
+                gap: var(--spacing-4);
+            }
+            
+            .quick-actions {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .borrowed-books {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="dashboard-header">
+        <div class="container">
+            <div class="dashboard-nav">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-book-reader"></i>
+                    <span>LibraryMS</span>
+                </a>
+                
+                <nav class="nav">
+                    <a href="#dashboard" class="nav-link active">Dashboard</a>
+                    <a href="catalog.html" class="nav-link">Browse Books</a>
+                    <a href="user-profile.html" class="nav-link">My Profile</a>
+                </nav>
+                
+                <div class="user-info">
+                    <div class="user-avatar">JD</div>
+                    <div>
+                        <div style="font-weight: 500;">John Doe</div>
+                        <div style="font-size: var(--font-size-sm); color: var(--gray-600);">Student</div>
+                    </div>
+                    <button class="btn btn-outline btn-sm" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="welcome-section">
+            <div class="container">
+                <div class="welcome-content">
+                    <h1>Welcome back!</h1>
+                    <p>Your library dashboard</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="dashboard-content">
+            <div class="container">
+                <div class="quick-actions">
+                    <div class="action-card" onclick="window.location.href='catalog.html'">
+                        <div class="action-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h3>Browse Books</h3>
+                        <p>Discover new books and add them to your reading list</p>
+                    </div>
+                    
+                    <div class="action-card" onclick="showMyBooks()">
+                        <div class="action-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h3>My Books</h3>
+                        <p>View your borrowed books and due dates</p>
+                    </div>
+                    
+                    <div class="action-card" onclick="showReservations()">
+                        <div class="action-icon">
+                            <i class="fas fa-bookmark"></i>
+                        </div>
+                        <h3>Reservations</h3>
+                        <p>Check your book reservations and pickup status</p>
+                    </div>
+                    
+                    <div class="action-card" onclick="showHistory()">
+                        <div class="action-icon">
+                            <i class="fas fa-history"></i>
+                        </div>
+                        <h3>History</h3>
+                        <p>View your complete borrowing history</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-8">
+                        <h2 style="margin-bottom: var(--spacing-6);">Currently Borrowed Books</h2>
+                        <div class="borrowed-books">
+                            <div class="book-item">
+                                <div class="book-cover">
+                                    <i class="fas fa-book"></i>
+                                </div>
+                                <div class="book-details">
+                                    <h4 class="book-title">The Great Gatsby</h4>
+                                    <p class="book-author">by F. Scott Fitzgerald</p>
+                                    <div class="book-meta">
+                                        <span>Borrowed: Jan 15, 2024</span>
+                                        <span class="due-date">Due: Jan 29, 2024</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="book-item">
+                                <div class="book-cover">
+                                    <i class="fas fa-book"></i>
+                                </div>
+                                <div class="book-details">
+                                    <h4 class="book-title">To Kill a Mockingbird</h4>
+                                    <p class="book-author">by Harper Lee</p>
+                                    <div class="book-meta">
+                                        <span>Borrowed: Jan 10, 2024</span>
+                                        <span class="due-date overdue">Overdue: Jan 24, 2024</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="book-item">
+                                <div class="book-cover">
+                                    <i class="fas fa-book"></i>
+                                </div>
+                                <div class="book-details">
+                                    <h4 class="book-title">1984</h4>
+                                    <p class="book-author">by George Orwell</p>
+                                    <div class="book-meta">
+                                        <span>Borrowed: Jan 20, 2024</span>
+                                        <span class="due-date">Due: Feb 3, 2024</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-4">
+                        <div class="recent-activity">
+                            <div class="activity-header">
+                                <h3 style="margin: 0;">Recent Activity</h3>
+                            </div>
+                            <div class="activity-list">
+                                <div class="activity-item activity-borrowed">
+                                    <div class="activity-icon">
+                                        <i class="fas fa-download"></i>
+                                    </div>
+                                    <div class="activity-content">
+                                        <div class="activity-title">Borrowed "1984"</div>
+                                        <div class="activity-meta">2 days ago</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="activity-item activity-reserved">
+                                    <div class="activity-icon">
+                                        <i class="fas fa-bookmark"></i>
+                                    </div>
+                                    <div class="activity-content">
+                                        <div class="activity-title">Reserved "Dune"</div>
+                                        <div class="activity-meta">3 days ago</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="activity-item activity-returned">
+                                    <div class="activity-icon">
+                                        <i class="fas fa-upload"></i>
+                                    </div>
+                                    <div class="activity-content">
+                                        <div class="activity-title">Returned "The Hobbit"</div>
+                                        <div class="activity-meta">1 week ago</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="activity-item activity-overdue">
+                                    <div class="activity-icon">
+                                        <i class="fas fa-exclamation"></i>
+                                    </div>
+                                    <div class="activity-content">
+                                        <div class="activity-title">Overdue Notice</div>
+                                        <div class="activity-meta">"To Kill a Mockingbird" is overdue</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="activity-item activity-borrowed">
+                                    <div class="activity-icon">
+                                        <i class="fas fa-download"></i>
+                                    </div>
+                                    <div class="activity-content">
+                                        <div class="activity-title">Borrowed "The Great Gatsby"</div>
+                                        <div class="activity-meta">2 weeks ago</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Library Management System. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Dashboard functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize dashboard
+            updateUserInfo();
+            loadRecentActivity();
+            
+            // Add smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+        
+        function updateUserInfo() {
+            // This would typically fetch user data from an API
+            console.log('Loading user information...');
+        }
+        
+        function loadRecentActivity() {
+            // This would typically fetch recent activity from an API
+            console.log('Loading recent activity...');
+        }
+        
+        function showMyBooks() {
+            // Scroll to borrowed books section or navigate to dedicated page
+            document.querySelector('.borrowed-books').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+        
+        function showReservations() {
+            // Navigate to reservations page or show modal
+            console.log('Showing reservations...');
+            alert('Reservations feature coming soon!');
+        }
+        
+        function showHistory() {
+            // Navigate to history page or show modal
+            console.log('Showing history...');
+            alert('History feature coming soon!');
+        }
+        
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                // Clear session and redirect to login
+                console.log('Logging out...');
+                window.location.href = 'user-login.html';
+            }
+        }
+        
+        // Add notification system
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.style.cssText = `
+                position: fixed;
+                top: 2rem;
+                right: 2rem;
+                padding: 1rem 1.5rem;
+                border-radius: 6px;
+                color: white;
+                font-weight: 500;
+                z-index: 1000;
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+                max-width: 400px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            `;
+            
+            if (type === 'success') {
+                notification.style.background = '#28a745';
+            } else if (type === 'error') {
+                notification.style.background = '#dc3545';
+            } else if (type === 'warning') {
+                notification.style.background = '#ffc107';
+                notification.style.color = '#000';
+            } else {
+                notification.style.background = '#17a2b8';
+            }
+            
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            // Animate in
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            // Auto remove
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.remove();
+                    }
+                }, 300);
+            }, 5000);
+        }
+        
+        // Example usage of notifications
+        setTimeout(() => {
+            showNotification('Welcome to your dashboard!', 'success');
+        }, 1000);
+    </script>
+</body>
+</html>

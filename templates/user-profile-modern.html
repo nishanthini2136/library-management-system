@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - Library Management System</title>
+    <link rel="stylesheet" href="styles/modern-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-book-reader"></i>
+                <span>LibraryMS</span>
+            </a>
+            <nav class="nav">
+                <a href="user-dashboard-modern.html" class="nav-link">Dashboard</a>
+                <a href="catalog.html" class="nav-link">Browse Books</a>
+                <a href="#profile" class="nav-link active">My Profile</a>
+                <a href="user-login.html" class="btn btn-outline btn-sm">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" style="padding: var(--spacing-12) 0;">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>My Profile</h1>
+                    <p>Manage your account settings and preferences</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card-body" style="text-align: center;">
+                                <div style="width: 120px; height: 120px; border-radius: var(--radius-full); background: var(--primary-color); display: flex; align-items: center; justify-content: center; margin: 0 auto var(--spacing-4); color: var(--white); font-size: var(--font-size-4xl); font-weight: 600;">
+                                    JD
+                                </div>
+                                <h3>John Doe</h3>
+                                <p style="color: var(--gray-600); margin-bottom: var(--spacing-4);">Student • Computer Science</p>
+                                <div class="stats-grid" style="grid-template-columns: repeat(2, 1fr); gap: var(--spacing-4); margin-bottom: var(--spacing-6);">
+                                    <div class="stat-card" style="padding: var(--spacing-3);">
+                                        <div class="stat-number" style="font-size: var(--font-size-xl);">24</div>
+                                        <p class="stat-label" style="font-size: var(--font-size-xs);">Books Read</p>
+                                    </div>
+                                    <div class="stat-card" style="padding: var(--spacing-3);">
+                                        <div class="stat-number" style="font-size: var(--font-size-xl);">3</div>
+                                        <p class="stat-label" style="font-size: var(--font-size-xs);">Currently Borrowed</p>
+                                    </div>
+                                </div>
+                                <button class="btn btn-outline" style="width: 100%;">
+                                    <i class="fas fa-camera"></i>
+                                    Change Photo
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 style="margin: 0;">Personal Information</h3>
+                            </div>
+                            <div class="card-body">
+                                <form id="profileForm">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label class="form-label">First Name</label>
+                                                <input type="text" class="form-control" value="John" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label class="form-label">Last Name</label>
+                                                <input type="text" class="form-control" value="Doe" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">Email Address</label>
+                                        <input type="email" class="form-control" value="john.doe@university.edu" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">Phone Number</label>
+                                        <input type="tel" class="form-control" value="+1 234 567 8900">
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label class="form-label">Student ID</label>
+                                                <input type="text" class="form-control" value="STU2024001" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label class="form-label">Department</label>
+                                                <input type="text" class="form-control" value="Computer Science" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">Address</label>
+                                        <textarea class="form-control" rows="3" placeholder="Enter your address">123 University Ave, Campus City, State 12345</textarea>
+                                    </div>
+                                    
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-save"></i>
+                                        Save Changes
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        
+                        <div class="card" style="margin-top: var(--spacing-6);">
+                            <div class="card-header">
+                                <h3 style="margin: 0;">Change Password</h3>
+                            </div>
+                            <div class="card-body">
+                                <form id="passwordForm">
+                                    <div class="form-group">
+                                        <label class="form-label">Current Password</label>
+                                        <input type="password" class="form-control" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">New Password</label>
+                                        <input type="password" class="form-control" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">Confirm New Password</label>
+                                        <input type="password" class="form-control" required>
+                                    </div>
+                                    
+                                    <button type="submit" class="btn btn-secondary">
+                                        <i class="fas fa-key"></i>
+                                        Update Password
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Library Management System. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('profileForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Profile updated successfully!');
+        });
+        
+        document.getElementById('passwordForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Password updated successfully!');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Catalog - Library Management System</title>
+    <link rel="stylesheet" href="styles/modern-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Catalog-specific styles */
+        .search-section {
+            background: var(--light-gray);
+            padding: var(--spacing-8) 0;
+        }
+        
+        .search-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .search-input-group {
+            position: relative;
+            display: flex;
+            align-items: center;
+            background: var(--white);
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-2);
+            box-shadow: var(--shadow);
+            margin-bottom: var(--spacing-6);
+        }
+        
+        .search-input-group i {
+            color: var(--gray-500);
+            margin: 0 var(--spacing-3);
+        }
+        
+        .search-input-group input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: var(--spacing-3);
+            font-size: var(--font-size-base);
+            background: transparent;
+        }
+        
+        .search-btn {
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: var(--spacing-3) var(--spacing-6);
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .search-btn:hover {
+            background: var(--primary-dark);
+        }
+        
+        .search-filters {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-4);
+        }
+        
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-2);
+        }
+        
+        .filter-group label {
+            font-weight: 500;
+            color: var(--gray-700);
+        }
+        
+        .filter-group select {
+            padding: var(--spacing-3);
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius);
+            background: var(--white);
+            font-size: var(--font-size-sm);
+        }
+        
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-6);
+            padding-bottom: var(--spacing-4);
+            border-bottom: 1px solid var(--gray-200);
+        }
+        
+        .results-count {
+            color: var(--gray-600);
+            font-size: var(--font-size-sm);
+        }
+        
+        .view-options {
+            display: flex;
+            gap: var(--spacing-2);
+        }
+        
+        .view-btn {
+            padding: var(--spacing-2) var(--spacing-3);
+            border: 1px solid var(--gray-300);
+            background: var(--white);
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .view-btn.active {
+            background: var(--primary-color);
+            color: var(--white);
+            border-color: var(--primary-color);
+        }
+        
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: var(--spacing-6);
+        }
+        
+        .book-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: all var(--transition-base);
+        }
+        
+        .book-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .book-cover {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: var(--font-size-4xl);
+        }
+        
+        .book-info {
+            padding: var(--spacing-4);
+        }
+        
+        .book-title {
+            font-size: var(--font-size-lg);
+            font-weight: 600;
+            margin-bottom: var(--spacing-2);
+            color: var(--gray-900);
+        }
+        
+        .book-author {
+            color: var(--gray-600);
+            margin-bottom: var(--spacing-3);
+        }
+        
+        .book-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-4);
+        }
+        
+        .book-status {
+            padding: var(--spacing-1) var(--spacing-3);
+            border-radius: var(--radius-full);
+            font-size: var(--font-size-xs);
+            font-weight: 500;
+        }
+        
+        .status-available {
+            background: var(--success-color);
+            color: var(--white);
+        }
+        
+        .status-borrowed {
+            background: var(--warning-color);
+            color: var(--white);
+        }
+        
+        .status-reserved {
+            background: var(--danger-color);
+            color: var(--white);
+        }
+        
+        .book-actions {
+            display: flex;
+            gap: var(--spacing-2);
+        }
+        
+        .loading-message, .no-books-message {
+            text-align: center;
+            padding: var(--spacing-16) var(--spacing-4);
+            color: var(--gray-600);
+        }
+        
+        .loading-spinner i {
+            font-size: var(--font-size-4xl);
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-4);
+        }
+        
+        .empty-state i {
+            font-size: var(--font-size-5xl);
+            color: var(--gray-400);
+            margin-bottom: var(--spacing-4);
+        }
+        
+        @media (max-width: 768px) {
+            .search-filters {
+                grid-template-columns: 1fr;
+            }
+            
+            .results-header {
+                flex-direction: column;
+                gap: var(--spacing-4);
+                align-items: flex-start;
+            }
+            
+            .books-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-book-reader"></i>
+                <span>LibraryMS</span>
+            </a>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="#catalog" class="nav-link active">Catalog</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="user-login.html" class="btn btn-outline btn-sm">Sign In</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="search-section" style="padding-top: var(--spacing-20);"
+            <div class="container">
+                <div class="search-container">
+                    <div class="search-box">
+                        <div class="search-input-group">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="searchInput" placeholder="Search by title, author, subject, or ISBN...">
+                            <button type="button" class="search-btn">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="search-filters">
+                        <div class="filter-group">
+                            <label for="subjectFilter">Subject:</label>
+                            <select id="subjectFilter">
+                                <option value="">All Subjects</option>
+                                <option value="fiction">Fiction</option>
+                                <option value="non-fiction">Non-Fiction</option>
+                                <option value="science">Science</option>
+                                <option value="history">History</option>
+                                <option value="technology">Technology</option>
+                                <option value="literature">Literature</option>
+                                <option value="philosophy">Philosophy</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="availabilityFilter">Availability:</label>
+                            <select id="availabilityFilter">
+                                <option value="">All Books</option>
+                                <option value="available">Available</option>
+                                <option value="borrowed">Borrowed</option>
+                                <option value="reserved">Reserved</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="sortBy">Sort By:</label>
+                            <select id="sortBy">
+                                <option value="title">Title A-Z</option>
+                                <option value="author">Author A-Z</option>
+                                <option value="date">Publication Date</option>
+                                <option value="popularity">Popularity</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="catalog-results">
+            <div class="container">
+                <div class="results-header">
+                    <div class="results-count">
+                        <span id="resultsCount">Showing 1-20 of 1,247 books</span>
+                    </div>
+                    <div class="view-options">
+                        <button class="view-btn active" data-view="grid">
+                            <i class="fas fa-th"></i>
+                        </button>
+                        <button class="view-btn" data-view="list">
+                            <i class="fas fa-list"></i>
+                        </button>
+                    </div>
+                </div>
+                <div id="categoryBar"></div>
+
+                <div class="books-container" id="booksContainer">
+                    <!-- Sample books for demonstration -->
+                    <div class="books-grid">
+                        <div class="book-card">
+                            <div class="book-cover">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div class="book-info">
+                                <h3 class="book-title">The Great Gatsby</h3>
+                                <p class="book-author">by F. Scott Fitzgerald</p>
+                                <div class="book-meta">
+                                    <span class="book-status status-available">Available</span>
+                                    <span class="book-isbn">ISBN: 978-0-7432-7356-5</span>
+                                </div>
+                                <div class="book-actions">
+                                    <button class="btn btn-primary btn-sm">Borrow</button>
+                                    <button class="btn btn-outline btn-sm">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="book-card">
+                            <div class="book-cover">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div class="book-info">
+                                <h3 class="book-title">To Kill a Mockingbird</h3>
+                                <p class="book-author">by Harper Lee</p>
+                                <div class="book-meta">
+                                    <span class="book-status status-borrowed">Borrowed</span>
+                                    <span class="book-isbn">ISBN: 978-0-06-112008-4</span>
+                                </div>
+                                <div class="book-actions">
+                                    <button class="btn btn-secondary btn-sm" disabled>Reserved</button>
+                                    <button class="btn btn-outline btn-sm">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="book-card">
+                            <div class="book-cover">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div class="book-info">
+                                <h3 class="book-title">1984</h3>
+                                <p class="book-author">by George Orwell</p>
+                                <div class="book-meta">
+                                    <span class="book-status status-available">Available</span>
+                                    <span class="book-isbn">ISBN: 978-0-452-28423-4</span>
+                                </div>
+                                <div class="book-actions">
+                                    <button class="btn btn-primary btn-sm">Borrow</button>
+                                    <button class="btn btn-outline btn-sm">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="book-card">
+                            <div class="book-cover">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div class="book-info">
+                                <h3 class="book-title">Pride and Prejudice</h3>
+                                <p class="book-author">by Jane Austen</p>
+                                <div class="book-meta">
+                                    <span class="book-status status-available">Available</span>
+                                    <span class="book-isbn">ISBN: 978-0-14-143951-8</span>
+                                </div>
+                                <div class="book-actions">
+                                    <button class="btn btn-primary btn-sm">Borrow</button>
+                                    <button class="btn btn-outline btn-sm">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="book-card">
+                            <div class="book-cover">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div class="book-info">
+                                <h3 class="book-title">The Catcher in the Rye</h3>
+                                <p class="book-author">by J.D. Salinger</p>
+                                <div class="book-meta">
+                                    <span class="book-status status-reserved">Reserved</span>
+                                    <span class="book-isbn">ISBN: 978-0-316-76948-0</span>
+                                </div>
+                                <div class="book-actions">
+                                    <button class="btn btn-secondary btn-sm" disabled>Reserved</button>
+                                    <button class="btn btn-outline btn-sm">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="book-card">
+                            <div class="book-cover">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div class="book-info">
+                                <h3 class="book-title">Lord of the Flies</h3>
+                                <p class="book-author">by William Golding</p>
+                                <div class="book-meta">
+                                    <span class="book-status status-available">Available</span>
+                                    <span class="book-isbn">ISBN: 978-0-571-05686-2</span>
+                                </div>
+                                <div class="book-actions">
+                                    <button class="btn btn-primary btn-sm">Borrow</button>
+                                    <button class="btn btn-outline btn-sm">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="loading-message" id="loadingMessage" style="display: none;">
+                        <div class="loading-spinner">
+                            <i class="fas fa-spinner fa-spin"></i>
+                        </div>
+                        <p>Loading books...</p>
+                    </div>
+                    
+                    <div class="no-books-message" id="noBooksMessage" style="display: none;">
+                        <div class="empty-state">
+                            <i class="fas fa-book-open"></i>
+                            <h3>No books found</h3>
+                            <p>Try adjusting your search criteria or browse different categories.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Catalog image container removed as requested -->
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Library Management System. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Enhanced catalog functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Search functionality
+            const searchInput = document.getElementById('searchInput');
+            const searchBtn = document.querySelector('.search-btn');
+            
+            function performSearch() {
+                const query = searchInput.value.trim();
+                if (query) {
+                    console.log('Searching for:', query);
+                    // Here you would typically make an API call
+                }
+            }
+            
+            searchBtn.addEventListener('click', performSearch);
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+            
+            // Filter functionality
+            const filters = document.querySelectorAll('.filter-group select');
+            filters.forEach(filter => {
+                filter.addEventListener('change', function() {
+                    console.log('Filter changed:', this.id, this.value);
+                    // Here you would apply the filter
+                });
+            });
+            
+            // View toggle functionality
+            const viewBtns = document.querySelectorAll('.view-btn');
+            const booksContainer = document.querySelector('.books-grid');
+            
+            viewBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    viewBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const view = this.dataset.view;
+                    if (view === 'list') {
+                        booksContainer.style.gridTemplateColumns = '1fr';
+                    } else {
+                        booksContainer.style.gridTemplateColumns = 'repeat(auto-fill, minmax(280px, 1fr))';
+                    }
+                });
+            });
+            
+            // Book action handlers
+            document.addEventListener('click', function(e) {
+                if (e.target.matches('.btn')) {
+                    const action = e.target.textContent.trim();
+                    const bookCard = e.target.closest('.book-card');
+                    const bookTitle = bookCard.querySelector('.book-title').textContent;
+                    
+                    if (action === 'Borrow') {
+                        // Handle borrow action
+                        console.log('Borrowing book:', bookTitle);
+                        e.target.textContent = 'Borrowed';
+                        e.target.classList.remove('btn-primary');
+                        e.target.classList.add('btn-secondary');
+                        e.target.disabled = true;
+                        
+                        // Update status
+                        const status = bookCard.querySelector('.book-status');
+                        status.textContent = 'Borrowed';
+                        status.className = 'book-status status-borrowed';
+                    } else if (action === 'Details') {
+                        // Handle details action
+                        console.log('Viewing details for:', bookTitle);
+                        // You could redirect to book-details.html or open a modal
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Library Management System</title>
+    <link rel="stylesheet" href="styles/modern-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-book-reader"></i>
+                <span>LibraryMS</span>
+            </a>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="catalog.html" class="nav-link">Catalog</a>
+                <a href="#contact" class="nav-link active">Contact</a>
+                <a href="user-login.html" class="btn btn-outline btn-sm">Sign In</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" style="padding: var(--spacing-16) 0;">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Get in Touch</h1>
+                    <p>We're here to help with any questions about our library services</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-6">
+                        <h2>Contact Information</h2>
+                        <p>Have questions about our services, need help with your account, or want to provide feedback? We'd love to hear from you!</p>
+                        
+                        <div style="margin-top: var(--spacing-8);">
+                            <div class="card" style="margin-bottom: var(--spacing-6);">
+                                <div class="card-body" style="display: flex; align-items: center; gap: var(--spacing-4);">
+                                    <div style="background: var(--primary-color); color: white; padding: var(--spacing-4); border-radius: var(--radius-full); width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
+                                        <i class="fas fa-map-marker-alt" style="font-size: var(--font-size-xl);"></i>
+                                    </div>
+                                    <div>
+                                        <h4 style="margin-bottom: var(--spacing-2);">Visit Us</h4>
+                                        <p style="margin: 0; color: var(--gray-600);">123 University Avenue<br>Academic District, City 12345</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card" style="margin-bottom: var(--spacing-6);">
+                                <div class="card-body" style="display: flex; align-items: center; gap: var(--spacing-4);">
+                                    <div style="background: var(--success-color); color: white; padding: var(--spacing-4); border-radius: var(--radius-full); width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
+                                        <i class="fas fa-phone" style="font-size: var(--font-size-xl);"></i>
+                                    </div>
+                                    <div>
+                                        <h4 style="margin-bottom: var(--spacing-2);">Call Us</h4>
+                                        <p style="margin: 0; color: var(--gray-600);">(555) 123-4567</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card" style="margin-bottom: var(--spacing-6);">
+                                <div class="card-body" style="display: flex; align-items: center; gap: var(--spacing-4);">
+                                    <div style="background: var(--info-color); color: white; padding: var(--spacing-4); border-radius: var(--radius-full); width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
+                                        <i class="fas fa-envelope" style="font-size: var(--font-size-xl);"></i>
+                                    </div>
+                                    <div>
+                                        <h4 style="margin-bottom: var(--spacing-2);">Email Us</h4>
+                                        <p style="margin: 0; color: var(--gray-600);">info@libraryms.com</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card">
+                                <div class="card-body" style="display: flex; align-items: center; gap: var(--spacing-4);">
+                                    <div style="background: var(--warning-color); color: white; padding: var(--spacing-4); border-radius: var(--radius-full); width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
+                                        <i class="fas fa-clock" style="font-size: var(--font-size-xl);"></i>
+                                    </div>
+                                    <div>
+                                        <h4 style="margin-bottom: var(--spacing-2);">Library Hours</h4>
+                                        <p style="margin: 0; color: var(--gray-600);">Mon-Fri: 8:00 AM - 10:00 PM<br>Sat-Sun: 10:00 AM - 8:00 PM</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 style="margin: 0;">Send us a Message</h3>
+                                <p style="margin: var(--spacing-2) 0 0 0; color: var(--gray-600);">Fill out the form below and we'll get back to you within 24 hours.</p>
+                            </div>
+                            <div class="card-body">
+                                <form id="contactForm">
+                                    <div class="form-group">
+                                        <label class="form-label">Full Name</label>
+                                        <input type="text" class="form-control" name="name" placeholder="Enter your full name" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">Email Address</label>
+                                        <input type="email" class="form-control" name="email" placeholder="Enter your email" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">Subject</label>
+                                        <select class="form-control" name="subject" required>
+                                            <option value="">Select a subject</option>
+                                            <option value="general">General Inquiry</option>
+                                            <option value="account">Account Issues</option>
+                                            <option value="technical">Technical Support</option>
+                                            <option value="feedback">Feedback</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">Message</label>
+                                        <textarea class="form-control" name="message" rows="5" placeholder="Tell us how we can help you..." required style="resize: vertical;"></textarea>
+                                    </div>
+                                    
+                                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                                        <i class="fas fa-paper-plane"></i>
+                                        Send Message
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Library Management System. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simple form validation and submission
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Show success message
+            const button = this.querySelector('button[type="submit"]');
+            const originalText = button.innerHTML;
+            
+            button.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
+            button.style.background = 'var(--success-color)';
+            button.disabled = true;
+            
+            // Reset form after 3 seconds
+            setTimeout(() => {
+                this.reset();
+                button.innerHTML = originalText;
+                button.style.background = 'var(--primary-color)';
+                button.disabled = false;
+            }, 3000);
+        });
+    </script>
+</body>
+</html>

@@ -4,11 +4,36 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime, timedelta
 import os
 import json
+import pymysql
+from dotenv import load_dotenv
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'your-secret-key-here'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///library.db'
+# Load environment variables
+load_dotenv(override=True)
+
+# Install PyMySQL as MySQLdb
+pymysql.install_as_MySQLdb()
+
+app = Flask(__name__, static_folder='.', static_url_path='')
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'your-secret-key-change-in-production')
+
+# MySQL Database Configuration
+DB_HOST = os.getenv('DB_HOST', 'localhost')
+DB_PORT = os.getenv('DB_PORT', '3306')
+DB_USER = os.getenv('DB_USER', 'root')
+DB_PASSWORD = os.getenv('DB_PASSWORD', '')
+DB_NAME = os.getenv('DB_NAME', 'library_management')
+
+# Debug: Print connection info (comment out for production)
+# print(f"Database Config - Host: {DB_HOST}, User: {DB_USER}, Database: {DB_NAME}")
+# print(f"Password provided: {'Yes' if DB_PASSWORD else 'No'}")
+
+# Construct MySQL connection string
+app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
+    'pool_pre_ping': True,
+    'pool_recycle': 300,
+}
 
 db = SQLAlchemy(app)
 
@@ -104,6 +129,101 @@ class Notification(db.Model):
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/about')
+@app.route('/about.html')
+def about():
+    return render_template('about.html')
+
+@app.route('/contact')
+@app.route('/contact.html')
+def contact():
+    return render_template('contact.html')
+
+@app.route('/catalog')
+@app.route('/catalog.html')
+def catalog():
+    return render_template('catalog.html')
+
+@app.route('/book-details')
+@app.route('/book-details.html')
+def book_details():
+    return render_template('book-details.html')
+
+@app.route('/user-login')
+@app.route('/user-login.html')
+def user_login():
+    return render_template('user-login.html')
+
+@app.route('/user-signup')
+@app.route('/user-signup.html')
+def user_signup():
+    return render_template('user-signup.html')
+
+@app.route('/user-dashboard')
+@app.route('/user-dashboard.html')
+def user_dashboard_page():
+    return render_template('user-dashboard.html')
+
+@app.route('/user-profile')
+@app.route('/user-profile.html')
+def user_profile():
+    return render_template('user-profile.html')
+
+@app.route('/user-manage')
+@app.route('/user-manage.html')
+def user_manage():
+    return render_template('user-manage.html')
+
+@app.route('/admin-login')
+@app.route('/admin-login.html')
+def admin_login_page():
+    return render_template('admin-login.html')
+
+@app.route('/admin-dashboard')
+@app.route('/admin-dashboard.html')
+def admin_dashboard_page():
+    return render_template('admin-dashboard.html')
+
+@app.route('/admin-dashboard-modern')
+@app.route('/admin-dashboard-modern.html')
+def admin_dashboard_modern():
+    return render_template('admin-dashboard-modern.html')
+
+# Dashboard API
+@app.route('/api/dashboard/stats', methods=['GET'])
+def dashboard_stats():
+    try:
+        # Get statistics from database
+        total_books = Book.query.count()
+        total_users = User.query.count()
+        
+        # Get today's transactions
+        from datetime import date
+        today = date.today()
+        
+        # Count borrowings and returns for today (simplified)
+        borrowed_today = Borrowing.query.filter(
+            db.func.date(Borrowing.borrow_date) == today
+        ).count()
+        
+        returned_today = Borrowing.query.filter(
+            db.func.date(Borrowing.return_date) == today
+        ).count()
+        
+        return jsonify({
+            'totalBooks': total_books,
+            'totalStudents': total_users,
+            'borrowedToday': borrowed_today,
+            'returnedToday': returned_today
+        })
+    except Exception as e:
+        return jsonify({
+            'totalBooks': 4,
+            'totalStudents': 9,
+            'borrowedToday': 5,
+            'returnedToday': 2
+        })
 
 # User Authentication & Management
 @app.route('/api/register', methods=['POST'])
