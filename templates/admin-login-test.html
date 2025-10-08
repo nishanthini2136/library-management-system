@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login Test - Library Management System</title>
+    <link rel="stylesheet" href="styles/auth-clean.css">
+    <style>
+        .test-container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .test-result {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .info { background: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+        .test-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .test-btn:hover { background: #0056b3; }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🔐 Admin Login Test</h1>
+        
+        <div class="test-result info">
+            <strong>Testing admin login functionality...</strong><br>
+            <small>If API test passes but form fails, there's a frontend issue.</small>
+        </div>
+        
+        <button class="test-btn" onclick="testAdminLogin()">Test Admin Login API</button>
+        <button class="test-btn" onclick="testFormSubmission()">Test Form Submission</button>
+        <button class="test-btn" onclick="goToRealLogin()">Go to Real Login</button>
+        
+        <div id="testResults"></div>
+        
+        <!-- Simple test form -->
+        <div style="margin-top: 30px; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
+            <h3>Quick Admin Login Form</h3>
+            <form id="testLoginForm">
+                <div style="margin: 10px 0;">
+                    <label>Username:</label>
+                    <input type="text" id="testUsername" value="admin" style="width: 100%; padding: 8px; margin: 5px 0;">
+                </div>
+                <div style="margin: 10px 0;">
+                    <label>Password:</label>
+                    <input type="password" id="testPassword" value="admin123" style="width: 100%; padding: 8px; margin: 5px 0;">
+                </div>
+                <button type="submit" style="background: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                    Login as Admin
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        async function testAdminLogin() {
+            const resultsDiv = document.getElementById('testResults');
+            resultsDiv.innerHTML = '<div class="test-result info">Testing admin login API...</div>';
+            
+            try {
+                const response = await fetch('/api/admin/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: 'admin',
+                        password: 'admin123'
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    resultsDiv.innerHTML = `
+                        <div class="test-result success">
+                            ✅ Admin API Login: SUCCESS<br>
+                            Response: ${JSON.stringify(data, null, 2)}
+                        </div>
+                    `;
+                } else {
+                    resultsDiv.innerHTML = `
+                        <div class="test-result error">
+                            ❌ Admin API Login: FAILED<br>
+                            Status: ${response.status}<br>
+                            Error: ${JSON.stringify(data, null, 2)}
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                resultsDiv.innerHTML = `
+                    <div class="test-result error">
+                        ❌ Admin API Login: ERROR<br>
+                        ${error.message}
+                    </div>
+                `;
+            }
+        }
+        
+        async function testFormSubmission() {
+            const resultsDiv = document.getElementById('testResults');
+            resultsDiv.innerHTML = '<div class="test-result info">Testing form submission...</div>';
+            
+            // Simulate what the real form does
+            const formData = new FormData();
+            formData.append('email', 'admin');
+            formData.append('password', 'admin123');
+            formData.append('userType', 'admin');
+            
+            try {
+                const loginData = {
+                    username: formData.get('email'), // Admin uses email field as username
+                    password: formData.get('password')
+                };
+                
+                const response = await fetch('/api/admin/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(loginData)
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    resultsDiv.innerHTML = `
+                        <div class="test-result success">
+                            ✅ Form Simulation: SUCCESS<br>
+                            This is exactly what the real form should do!<br>
+                            Response: ${JSON.stringify(data, null, 2)}
+                        </div>
+                    `;
+                } else {
+                    resultsDiv.innerHTML = `
+                        <div class="test-result error">
+                            ❌ Form Simulation: FAILED<br>
+                            Status: ${response.status}<br>
+                            Error: ${JSON.stringify(data, null, 2)}
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                resultsDiv.innerHTML = `
+                    <div class="test-result error">
+                        ❌ Form Simulation: ERROR<br>
+                        ${error.message}
+                    </div>
+                `;
+            }
+        }
+        
+        function goToRealLogin() {
+            window.location.href = '/user-login.html';
+        }
+        
+        // Handle the test form submission
+        document.getElementById('testLoginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('testUsername').value;
+            const password = document.getElementById('testPassword').value;
+            const resultsDiv = document.getElementById('testResults');
+            
+            resultsDiv.innerHTML = '<div class="test-result info">Logging in...</div>';
+            
+            try {
+                const response = await fetch('/api/admin/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        password: password
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    resultsDiv.innerHTML = `
+                        <div class="test-result success">
+                            🎉 LOGIN SUCCESSFUL!<br>
+                            Welcome, ${data.role}!<br>
+                            Redirecting to admin dashboard...
+                        </div>
+                    `;
+                    
+                    // Redirect after 2 seconds
+                    setTimeout(() => {
+                        window.location.href = '/admin-dashboard-modern.html';
+                    }, 2000);
+                } else {
+                    resultsDiv.innerHTML = `
+                        <div class="test-result error">
+                            ❌ LOGIN FAILED<br>
+                            ${data.error || 'Unknown error'}
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                resultsDiv.innerHTML = `
+                    <div class="test-result error">
+                        ❌ LOGIN ERROR<br>
+                        ${error.message}
+                    </div>
+                `;
+            }
+        });
+        
+        // Auto-run API test when page loads
+        document.addEventListener('DOMContentLoaded', testAdminLogin);
+    </script>
+</body>
+</html>

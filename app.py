@@ -190,6 +190,27 @@ def admin_dashboard_page():
 def admin_dashboard_modern():
     return render_template('admin-dashboard-modern.html')
 
+@app.route('/database-viewer')
+@app.route('/database-viewer.html')
+def database_viewer():
+    return render_template('database-viewer.html')
+
+@app.route('/admin-login-test')
+@app.route('/admin-login-test.html')
+def admin_login_test():
+    return render_template('admin-login-test.html')
+
+@app.route('/login-debug')
+@app.route('/login-debug.html')
+def login_debug():
+    return render_template('login-debug.html')
+
+@app.route('/simple-admin-login')
+@app.route('/simple-admin-login.html')
+def simple_admin_login():
+    return render_template('simple-admin-login.html')
+
+
 # Dashboard API
 @app.route('/api/dashboard/stats', methods=['GET'])
 def dashboard_stats():

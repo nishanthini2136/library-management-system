@@ -235,22 +235,33 @@
 <body>
     <header class="header">
         <div class="container">
-            <a href="index.html" class="logo">
+            <a href="/" class="logo">
                 <i class="fas fa-book-reader"></i>
                 <span>LibraryMS</span>
             </a>
             <nav class="nav">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="about.html" class="nav-link">About</a>
-                <a href="#catalog" class="nav-link active">Catalog</a>
-                <a href="contact.html" class="nav-link">Contact</a>
-                <a href="user-login.html" class="btn btn-outline btn-sm">Sign In</a>
+                <a href="/" class="nav-link">Home</a>
+                <a href="/about.html" class="nav-link">About</a>
+                <a href="/catalog.html" class="nav-link active">Catalog</a>
+                <a href="/contact.html" class="nav-link">Contact</a>
+                <a href="/user-login.html" class="btn btn-outline btn-sm">Sign In</a>
             </nav>
         </div>
     </header>
 
     <main>
-        <section class="search-section" style="padding-top: var(--spacing-20);"
+        <section class="hero hero-with-bg" style="padding: var(--spacing-16) 0;">
+            <div class="hero-background"></div>
+            <div class="hero-overlay"></div>
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Explore Our Collection</h1>
+                    <p>Discover thousands of books across various subjects and genres. Find your next great read today!</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="search-section">
             <div class="container">
                 <div class="search-container">
                     <div class="search-box">
@@ -306,7 +317,7 @@
             <div class="container">
                 <div class="results-header">
                     <div class="results-count">
-                        <span id="resultsCount">Showing 1-20 of 1,247 books</span>
+                        <span id="resultsCount">Showing 0 books</span>
                     </div>
                     <div class="view-options">
                         <button class="view-btn active" data-view="grid">
@@ -320,129 +331,11 @@
                 <div id="categoryBar"></div>
 
                 <div class="books-container" id="booksContainer">
-                    <!-- Sample books for demonstration -->
-                    <div class="books-grid">
-                        <div class="book-card">
-                            <div class="book-cover">
-                                <i class="fas fa-book"></i>
-                            </div>
-                            <div class="book-info">
-                                <h3 class="book-title">The Great Gatsby</h3>
-                                <p class="book-author">by F. Scott Fitzgerald</p>
-                                <div class="book-meta">
-                                    <span class="book-status status-available">Available</span>
-                                    <span class="book-isbn">ISBN: 978-0-7432-7356-5</span>
-                                </div>
-                                <div class="book-actions">
-                                    <button class="btn btn-primary btn-sm">Borrow</button>
-                                    <button class="btn btn-outline btn-sm">Details</button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="book-card">
-                            <div class="book-cover">
-                                <i class="fas fa-book"></i>
-                            </div>
-                            <div class="book-info">
-                                <h3 class="book-title">To Kill a Mockingbird</h3>
-                                <p class="book-author">by Harper Lee</p>
-                                <div class="book-meta">
-                                    <span class="book-status status-borrowed">Borrowed</span>
-                                    <span class="book-isbn">ISBN: 978-0-06-112008-4</span>
-                                </div>
-                                <div class="book-actions">
-                                    <button class="btn btn-secondary btn-sm" disabled>Reserved</button>
-                                    <button class="btn btn-outline btn-sm">Details</button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="book-card">
-                            <div class="book-cover">
-                                <i class="fas fa-book"></i>
-                            </div>
-                            <div class="book-info">
-                                <h3 class="book-title">1984</h3>
-                                <p class="book-author">by George Orwell</p>
-                                <div class="book-meta">
-                                    <span class="book-status status-available">Available</span>
-                                    <span class="book-isbn">ISBN: 978-0-452-28423-4</span>
-                                </div>
-                                <div class="book-actions">
-                                    <button class="btn btn-primary btn-sm">Borrow</button>
-                                    <button class="btn btn-outline btn-sm">Details</button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="book-card">
-                            <div class="book-cover">
-                                <i class="fas fa-book"></i>
-                            </div>
-                            <div class="book-info">
-                                <h3 class="book-title">Pride and Prejudice</h3>
-                                <p class="book-author">by Jane Austen</p>
-                                <div class="book-meta">
-                                    <span class="book-status status-available">Available</span>
-                                    <span class="book-isbn">ISBN: 978-0-14-143951-8</span>
-                                </div>
-                                <div class="book-actions">
-                                    <button class="btn btn-primary btn-sm">Borrow</button>
-                                    <button class="btn btn-outline btn-sm">Details</button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="book-card">
-                            <div class="book-cover">
-                                <i class="fas fa-book"></i>
-                            </div>
-                            <div class="book-info">
-                                <h3 class="book-title">The Catcher in the Rye</h3>
-                                <p class="book-author">by J.D. Salinger</p>
-                                <div class="book-meta">
-                                    <span class="book-status status-reserved">Reserved</span>
-                                    <span class="book-isbn">ISBN: 978-0-316-76948-0</span>
-                                </div>
-                                <div class="book-actions">
-                                    <button class="btn btn-secondary btn-sm" disabled>Reserved</button>
-                                    <button class="btn btn-outline btn-sm">Details</button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="book-card">
-                            <div class="book-cover">
-                                <i class="fas fa-book"></i>
-                            </div>
-                            <div class="book-info">
-                                <h3 class="book-title">Lord of the Flies</h3>
-                                <p class="book-author">by William Golding</p>
-                                <div class="book-meta">
-                                    <span class="book-status status-available">Available</span>
-                                    <span class="book-isbn">ISBN: 978-0-571-05686-2</span>
-                                </div>
-                                <div class="book-actions">
-                                    <button class="btn btn-primary btn-sm">Borrow</button>
-                                    <button class="btn btn-outline btn-sm">Details</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="loading-message" id="loadingMessage" style="display: none;">
-                        <div class="loading-spinner">
-                            <i class="fas fa-spinner fa-spin"></i>
-                        </div>
-                        <p>Loading books...</p>
-                    </div>
-                    
-                    <div class="no-books-message" id="noBooksMessage" style="display: none;">
+                    <div class="no-books-message" id="noBooksMessage">
                         <div class="empty-state">
                             <i class="fas fa-book-open"></i>
-                            <h3>No books found</h3>
-                            <p>Try adjusting your search criteria or browse different categories.</p>
+                            <h3>No books available</h3>
+                            <p>The catalog is currently empty. Books will be added soon.</p>
                         </div>
                     </div>
                 </div>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Debug - Library Management System</title>
+    <link rel="stylesheet" href="styles/auth-clean.css">
+    <style>
+        .debug-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .debug-section {
+            background: white;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .result {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+        }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .info { background: #d1ecf1; color: #0c5460; }
+        .test-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="debug-container">
+        <h1>🔍 Admin Login Debug Tool</h1>
+        
+        <div class="debug-section">
+            <h3>1. Test Direct API Call</h3>
+            <button class="test-btn" onclick="testDirectAPI()">Test API Directly</button>
+            <div id="apiResult"></div>
+        </div>
+        
+        <div class="debug-section">
+            <h3>2. Test Exact Form Data</h3>
+            <p>This simulates exactly what the login form sends:</p>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div>
+                    <h4>Form Inputs:</h4>
+                    <label>Email/Username:</label>
+                    <input type="text" id="formEmail" value="admin" style="width: 100%; margin: 5px 0; padding: 8px;">
+                    
+                    <label>Password:</label>
+                    <input type="password" id="formPassword" value="admin123" style="width: 100%; margin: 5px 0; padding: 8px;">
+                    
+                    <label>User Type:</label>
+                    <select id="formUserType" style="width: 100%; margin: 5px 0; padding: 8px;">
+                        <option value="user">User</option>
+                        <option value="admin" selected>Admin</option>
+                    </select>
+                    
+                    <button class="test-btn" onclick="testFormData()" style="width: 100%; margin-top: 10px;">Test Form Data</button>
+                </div>
+                
+                <div>
+                    <h4>What Gets Sent:</h4>
+                    <div id="formDataPreview" class="result info">
+                        Click "Test Form Data" to see what gets sent
+                    </div>
+                </div>
+            </div>
+            
+            <div id="formResult"></div>
+        </div>
+        
+        <div class="debug-section">
+            <h3>3. Real Login Form Test</h3>
+            <p>This is the actual login form code:</p>
+            
+            <form class="login-form" id="debugLoginForm">
+                <div class="form-group">
+                    <label for="debugEmail" id="debugEmailLabel">Email</label>
+                    <input type="text" id="debugEmail" name="email" required value="admin">
+                </div>
+                
+                <div class="form-group">
+                    <label for="debugPassword">Password</label>
+                    <input type="password" id="debugPassword" name="password" required value="admin123">
+                </div>
+                
+                <div class="form-group">
+                    <label for="debugUserType">Account Type</label>
+                    <select id="debugUserType" name="userType" required>
+                        <option value="user">User</option>
+                        <option value="admin" selected>Admin</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="login-btn">Sign In (Debug)</button>
+            </form>
+            
+            <div id="realFormResult"></div>
+        </div>
+        
+        <div class="debug-section">
+            <h3>4. Navigation</h3>
+            <button class="test-btn" onclick="window.location.href='/user-login.html'">Go to Real Login</button>
+            <button class="test-btn" onclick="window.location.href='/admin-login-test.html'">Go to Test Login</button>
+            <button class="test-btn" onclick="window.location.href='/'">Go to Home</button>
+        </div>
+    </div>
+
+    <script src="js/auth-clean.js"></script>
+    <script>
+        async function testDirectAPI() {
+            const resultDiv = document.getElementById('apiResult');
+            resultDiv.innerHTML = '<div class="result info">Testing direct API call...</div>';
+            
+            try {
+                const response = await fetch('/api/admin/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        username: 'admin',
+                        password: 'admin123'
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    resultDiv.innerHTML = `<div class="result success">✅ Direct API Success: ${JSON.stringify(data)}</div>`;
+                } else {
+                    resultDiv.innerHTML = `<div class="result error">❌ Direct API Failed: ${JSON.stringify(data)}</div>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="result error">❌ API Error: ${error.message}</div>`;
+            }
+        }
+        
+        async function testFormData() {
+            const email = document.getElementById('formEmail').value;
+            const password = document.getElementById('formPassword').value;
+            const userType = document.getElementById('formUserType').value;
+            
+            // Show what will be sent
+            const formData = new FormData();
+            formData.append('email', email);
+            formData.append('password', password);
+            formData.append('userType', userType);
+            
+            const loginData = userType === 'admin' 
+                ? { username: formData.get('email'), password: formData.get('password') }
+                : { email: formData.get('email'), password: formData.get('password') };
+            
+            document.getElementById('formDataPreview').innerHTML = `
+                <strong>Form Data:</strong><br>
+                email: "${email}"<br>
+                password: "${password}"<br>
+                userType: "${userType}"<br><br>
+                <strong>API Payload:</strong><br>
+                ${JSON.stringify(loginData, null, 2)}
+            `;
+            
+            // Test the actual request
+            const resultDiv = document.getElementById('formResult');
+            resultDiv.innerHTML = '<div class="result info">Testing form data...</div>';
+            
+            try {
+                const endpoint = userType === 'admin' ? '/api/admin/login' : '/api/login';
+                
+                const response = await fetch(endpoint, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(loginData)
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    resultDiv.innerHTML = `<div class="result success">✅ Form Data Success: ${JSON.stringify(data)}</div>`;
+                } else {
+                    resultDiv.innerHTML = `<div class="result error">❌ Form Data Failed: ${JSON.stringify(data)}</div>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="result error">❌ Form Data Error: ${error.message}</div>`;
+            }
+        }
+        
+        // Handle the real form submission
+        document.getElementById('debugLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const resultDiv = document.getElementById('realFormResult');
+            resultDiv.innerHTML = '<div class="result info">Testing real form submission...</div>';
+            
+            // This will use the actual auth-clean.js handleLogin function
+            // We can see what happens in the console
+            console.log('=== REAL FORM TEST ===');
+            
+            // Manually trigger the form handler
+            const form = e.target;
+            const formData = new FormData(form);
+            
+            console.log('Form data:', {
+                email: formData.get('email'),
+                password: formData.get('password'),
+                userType: formData.get('userType')
+            });
+            
+            // Let the real handler take over
+            // (This will be handled by auth-clean.js)
+        });
+        
+        // Update label when user type changes
+        document.getElementById('debugUserType').addEventListener('change', function() {
+            const label = document.getElementById('debugEmailLabel');
+            if (this.value === 'admin') {
+                label.textContent = 'Username';
+            } else {
+                label.textContent = 'Email';
+            }
+        });
+        
+        // Auto-run direct API test
+        document.addEventListener('DOMContentLoaded', testDirectAPI);
+    </script>
+</body>
+</html>

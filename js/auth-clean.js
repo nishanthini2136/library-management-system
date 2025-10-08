@@ -35,8 +35,31 @@ function initSelectEnhancements() {
         // Add change event logging for debugging
         select.addEventListener('change', function() {
             console.log('Account type changed to:', this.value);
+            
+            // Update email field for admin login
+            if (this.name === 'userType') {
+                updateEmailFieldForUserType(this.value);
+            }
         });
     });
+}
+
+// Update email field based on user type
+function updateEmailFieldForUserType(userType) {
+    const emailInput = document.getElementById('email');
+    const emailLabel = document.getElementById('emailLabel');
+    
+    if (emailInput && emailLabel) {
+        if (userType === 'admin') {
+            emailLabel.textContent = 'Username';
+            emailInput.placeholder = 'admin';
+            emailInput.type = 'text';
+        } else {
+            emailLabel.textContent = 'Email';
+            emailInput.placeholder = 'abc@gmail.com';
+            emailInput.type = 'text'; // Keep as text to avoid validation issues
+        }
+    }
 }
 
 // Form Validation
@@ -217,6 +240,8 @@ async function handleLogin(event) {
         const userType = formData.get('userType');
         const loginEndpoint = userType === 'admin' ? '/api/admin/login' : '/api/login';
         
+        console.log('Login attempt:', { userType, loginEndpoint });
+        
         // Prepare login data based on user type
         const loginData = userType === 'admin' 
             ? {
@@ -228,6 +253,8 @@ async function handleLogin(event) {
                 password: formData.get('password')
             };
         
+        console.log('Login data:', { ...loginData, password: '***' });
+        
         const response = await fetch(loginEndpoint, {
             method: 'POST',
             headers: {
@@ -237,6 +264,8 @@ async function handleLogin(event) {
         });
         
         const data = await response.json();
+        
+        console.log('Login response:', { status: response.status, data });
         
         if (response.ok) {
             showSuccessMessage('Login successful! Redirecting...');
@@ -250,6 +279,7 @@ async function handleLogin(event) {
                 }
             }, 1500);
         } else {
+            console.error('Login failed:', data);
             showErrorMessage(data.error || 'Login failed. Please check your credentials.');
         }
     } catch (error) {
